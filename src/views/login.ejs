@@ -1,0 +1,17 @@
+<%- include('includes/top.ejs') %>
+
+<article class="login">
+    <h2 class="section-title">Logowanie</h2>
+    <p class="section-subtitle">zaloguj się do aplikacji</p>
+    <form class="login form" method="post" action="/login">
+        <label class="form-label">Nazwa użytkownika</label>
+        <input class="form-input" type="text" name="user">
+        <label class="form-label">Hasło</label>
+        <input class="form-input" type="password" name="password">
+        <div class="button-row">
+            <input type="submit" class="btn edit" value="Zaloguj">
+        </div>
+    </form>
+</article>
+
+<%- include('includes/bottom.ejs') %>

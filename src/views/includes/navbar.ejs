@@ -1,0 +1,26 @@
+<% if (user && user.name && user.id)  { %>
+
+    <nav class="navbar">
+        <div class="logo-wrapper">
+            <img src="assets/adampol_small_3d96b5c58ab4e98a0f4c.png" alt="adampol logo" class="logo-img">
+            <p class="logo-company-name">PPHU Adampol</p>
+        </div>
+        <div class="menu-details">
+            <div class="user-login-wrapper">
+                <% if (user && user.name && user.id)  { %>
+                    <span class="user-name">zalogowano jako: <%= user.name %></span>
+                    <a href="/logout" class="login-link">wyloguj</a>
+                <% } else { %>
+                    <a href="/login" class="login-link">zaloguj</a>
+                <% } %>
+            </div>
+            <ul class="navbar-menu">
+                <% for (menu_item of sections) { %>
+                <li class="menu-item <%= menu_item === selectedPage ? 'selected':'' %>"><a href="#" class="menu-link"><%= menu_item %></a>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+
+<% } %>
