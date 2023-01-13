@@ -1,5 +1,5 @@
 const page_titles = ['Ustawienia', 'HTML', 'Galerie', 'Podstrony', 'Języki', 'Dodatkowe'];
-const pages = [
+const pageSections = [
     {
         id: 'ustawienia',
         link: 'ustawienia',
@@ -37,7 +37,7 @@ const document_title = 'To jest testowa strona';
 
 module.exports = {
     page_titles,
-    pages,
+    pageSections,
     selectedPageId: 'ustawienia',
     document_title,
     user: {
