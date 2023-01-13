@@ -30,20 +30,14 @@ router.use("/languages/list", (req, res, next) => {
     res.send('languages');
 });
 
-router.get('/galleries/list', (req, res, next) => {
-    res.send('galleries');
+router.use("/languages/add-new", (req, res, next) => {
+    res.send('languages');
 });
 
-router.get('/galleries/add-new', (req, res, next) => {
-    res.send('add new galery');
+
+router.use("/languages/edit/:id", (req, res, next) => {
+    res.send('languages');
 });
 
-router.get('/galleries/edit/:id', (req, res, next) => {
-    res.send('edit gallary ');
-});
-
-router.use('/html-fragments/list', (req, res, next) => {
-    res.send('html fragments');
-});
 
 module.exports = router;

@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const csrf = require('csurf');
 const data = require('./model/data');
 //routes
 
@@ -10,20 +11,28 @@ const adminRoutes = require('./routes/admin');
 
 
 const app = express();
+const csrfProtection = csrf();
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.use(session({
-  secret:'To_jest_jakiś_sekretny_klucz_QWZx!23#',
-  resave: false,
-  saveUninitialized: false
-}));
 
-
-app.use(express.static(path.join(__dirname, 'static')));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(session({
+    secret: 'To_jest_jakiś_sekretny_klucz_QWZx!23#',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(csrfProtection);
+
+app.use((req,res,next)=>{
+    res.locals.csrfToken = req.csrfToken();
+    next();
+})
+
+app.use(express.static(path.join(__dirname, 'static')));
+
 
 app.use(mainRoutes);
 app.use(adminRoutes);

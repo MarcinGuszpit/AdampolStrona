@@ -5,13 +5,17 @@ const pageSections = [
         link: 'ustawienia',
         menuTitle: 'Ustawienia',
         pageTitle: 'Administrator - ustawnienia',
-        description: 'Dodatkowe ustawienia'
+        description: 'Dodatkowe ustawienia',
+        contentType: 'text'
     },
     {
         id: 'html',
         link: 'html',
         menuTitle: 'HTML',
-        description: 'Fragmenty HTML'
+        menuTitle: 'Ustawienia',
+        pageTitle: 'Administrator - ustawnienia',
+        description: 'Dodatkowe ustawienia',
+        contentType: 'text'
     },
     {
         id: 'galerie',
@@ -33,11 +37,44 @@ const pageSections = [
     },
 
 ]
+
+const mainPageSections = [
+    {
+        id: 'onas',
+        linkHref: 'onas',
+        menuTitle: 'O nas',
+        pageTitle: 'Opis',
+        contentType: 'text',
+        contentId: 'xx22rryytt'
+    },
+]
+
+const contentType = [
+    {
+        id: "text",
+        name: 'tekst',
+        description: "zawartość tekstowa"
+    },
+    {
+        id: "gallery",
+        name: "galeria obrazów",
+        description: "galeria obrazów"
+    },
+    {
+        id: "html-fragment",
+        name: 'html',
+        description: "kod HTML"
+    }
+]
+
+
+
 const document_title = 'To jest testowa strona';
 
 module.exports = {
     page_titles,
     pageSections,
+    contentType,
     selectedPageId: 'ustawienia',
     document_title,
     user: {
