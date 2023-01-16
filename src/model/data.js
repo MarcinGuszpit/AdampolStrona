@@ -12,8 +12,15 @@ const pageSections = [
         id: 'html',
         link: 'html',
         menuTitle: 'HTML',
-        menuTitle: 'Ustawienia',
         pageTitle: 'Administrator - ustawnienia',
+        description: 'Dodatkowe ustawienia',
+        contentType: 'text'
+    },
+    {
+        id: 'txt',
+        link: 'tekst',
+        menuTitle: 'Teksty',
+        pageTitle: 'Administrator - teksty',
         description: 'Dodatkowe ustawienia',
         contentType: 'text'
     },
@@ -24,12 +31,6 @@ const pageSections = [
         description: 'Galerie obrazów'
     },
     {
-        id: 'jezyki',
-        link: 'jezyki',
-        menuTitle: 'Języki',
-        description: 'Lista języków'
-    },
-    {
         id: 'dodatkowe',
         link: 'dodatkowe',
         menuTitle: 'Dodatkowe',
@@ -37,6 +38,33 @@ const pageSections = [
     },
 
 ]
+
+const languages = [
+    {
+        id: 'pl',
+        description: 'polski',
+        caption: 'polski',
+        flagImg: '/flags/pl_small.png'
+    },
+    {
+        id: 'en',
+        description: 'angielski',
+        caption: 'english',
+        flagImg: '/flags/uk_small.png'
+    },
+    {
+        id: 'de',
+        caption: 'deutch',
+        description: 'niemiecki',
+        flagImg: '/flags/de_small.png'
+    },
+    {
+        id: 'ru',
+        caption: 'русский',
+        description: 'rosyjski',
+        flagImg: '/flags/ru_small.png'
+    },
+];
 
 const mainPageSections = [
     {
@@ -49,7 +77,7 @@ const mainPageSections = [
     },
 ]
 
-const contentType = [
+const contentTypes = [
     {
         id: "text",
         name: 'tekst',
@@ -68,13 +96,13 @@ const contentType = [
 ]
 
 
-
 const document_title = 'To jest testowa strona';
 
 module.exports = {
     page_titles,
     pageSections,
-    contentType,
+    contentTypes,
+    languages,
     selectedPageId: 'ustawienia',
     document_title,
     user: {

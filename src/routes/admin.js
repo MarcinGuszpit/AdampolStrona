@@ -22,22 +22,4 @@ router.get("/logout", (req, res, next) => {
 });
 
 
-router.use("/other-settings/list", (req, res, next) => {
-    res.send('other settings');
-});
-
-router.use("/languages/list", (req, res, next) => {
-    res.send('languages');
-});
-
-router.use("/languages/add-new", (req, res, next) => {
-    res.send('languages');
-});
-
-
-router.use("/languages/edit/:id", (req, res, next) => {
-    res.send('languages');
-});
-
-
 module.exports = router;
