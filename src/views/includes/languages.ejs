@@ -1,0 +1,15 @@
+<div class="element">
+    <h3 class="element-title">Języki</h3>
+    <% if (languages.length > 0) { %>
+
+        <% for (const lang of languages) { %>
+        <div class="row eof">
+            <label class="label">nazwa języka:</label>
+            <span class="value-wrapper">Język <%= lang.description %> </span>
+            <img class="value-img" src="<%= lang.flagImg %>" alt="flaga języka <%= lang.description %>">
+        </div>
+        <% } %>
+    <% } else { %>
+        <p class="element-msg">Brak elementów do wyświetlenia</p>
+    <% } %>
+</div>

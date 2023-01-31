@@ -1,0 +1,19 @@
+<div class="element">
+    <h3 class="element-title">Rodzaje kontentu</h3>
+    <% if (contentTypes.length > 0) { %>
+
+        <% for (const content of contentTypes) { %>
+            <div class="row">
+                <label class="label">Nazwa typu contentu:</label>
+                <span class="value-wrapper"><%= content.name %> </span>
+            </div>
+            <div class="row eof">
+                <label class="label">Opis typu:</label>
+                <span class="value-wrapper"><%= content.description %> </span>
+            </div>
+
+        <% } %>
+    <% } else { %>
+        <p class="element-msg">Brak elementów do wyświetlenia</p>
+    <% } %>
+</div>
