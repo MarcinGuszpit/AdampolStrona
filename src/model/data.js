@@ -1,40 +1,53 @@
 const page_titles = ['Ustawienia', 'HTML', 'Galerie', 'Podstrony', 'Języki', 'Dodatkowe'];
-const pageSections = [
+const pages = [
     {
         id: 'ustawienia',
-        link: 'ustawienia',
+        link: 'settings',
         menuTitle: 'Ustawienia',
         pageTitle: 'Administrator - ustawnienia',
-        description: 'Dodatkowe ustawienia',
-        contentType: 'text'
+        subTitle: 'Dodatkowe ustawienia aplikacji',
+        description: 'Inne ustawienia aplikacji, które możesz zmieniać'
+    },
+    {
+        id: 'pageSections',
+        link: 'page-sections/list',
+        menuTitle: 'Sekcje strony głównej',
+        pageTitle: 'Administrator - sekcje strony głównej',
+        description: 'Lista wszystkich sekcji strony głównej',
+        subTitle: 'Sekcje strony głównej'
     },
     {
         id: 'html',
-        link: 'html',
+        link: 'html/list',
         menuTitle: 'HTML',
-        pageTitle: 'Administrator - ustawnienia',
-        description: 'Dodatkowe ustawienia',
-        contentType: 'text'
+        pageTitle: 'Administrator - html',
+        subTitle: 'Fragmenty kodu HTML',
+        description: 'Fragmenty kodu HTML. który możesz wykorzystać w swojej aplikacji',
+
     },
     {
-        id: 'txt',
-        link: 'tekst',
+        id: 'texts',
+        link: 'texts/list',
         menuTitle: 'Teksty',
         pageTitle: 'Administrator - teksty',
-        description: 'Dodatkowe ustawienia',
-        contentType: 'text'
+        subTitle: 'Zawartość tekstowa',
+        description: 'Zawartość tekstowa, którą możesz wypełnić swoją stronę.',
     },
     {
-        id: 'galerie',
-        link: 'galerie',
+        id: 'galleries',
+        link: 'galleries/list',
         menuTitle: 'Galerie',
-        description: 'Galerie obrazów'
+        pageTitle: 'Administrator - galerie',
+        subTitle: 'Galerie obrazów',
+        description: 'Galerie obrazów do wykorzystania na stronie'
     },
     {
-        id: 'dodatkowe',
-        link: 'dodatkowe',
+        id: 'additional',
+        link: 'additional-settings',
         menuTitle: 'Dodatkowe',
-        description: 'Różne, pozostałe ustawienia'
+        pageTitle: 'Administrator - dodatkowe tablice',
+        subTitle: 'Dodatkowe tabele używane w aplikacji',
+        description: 'Tutaj inne tabele, z których korzysta aplikacja'
     },
 
 ]
@@ -94,13 +107,11 @@ const contentTypes = [
         description: "kod HTML"
     }
 ]
-
-
 const document_title = 'To jest testowa strona';
 
 module.exports = {
     page_titles,
-    pageSections,
+    pages,
     contentTypes,
     languages,
     selectedPageId: 'ustawienia',

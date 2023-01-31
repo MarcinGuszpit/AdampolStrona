@@ -9,7 +9,7 @@ const data = require('./model/data');
 const mainRoutes = require('./routes/main');
 const adminRoutes = require('./routes/admin');
 const adminRoutesAdditionalSettings = require('./routes/admin-settings');
-
+const adminRoutesTexts = require('./routes/admin-texts');
 
 const app = express();
 const csrfProtection = csrf();
@@ -34,7 +34,8 @@ app.use((req,res,next)=>{
 
 app.use(express.static(path.join(__dirname, 'static')));
 
-app.use(adminRoutesAdditionalSettings)
+app.use(adminRoutesAdditionalSettings);
+app.use(adminRoutesTexts);
 app.use(mainRoutes);
 app.use(adminRoutes);
 

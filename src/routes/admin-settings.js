@@ -3,18 +3,22 @@ const data = require("../model/data");
 const router = express.Router();
 
 router.use('/additional-settings', (req, res, next) => {
+
+    const page = (data.pages).find((elem) => {
+        return (elem.id === 'additional');
+    });
+
     res.render('additional-settings.ejs', {
-        pageTitle: 'Dodatkowe ustawienia',
+        page,
+        pageTitle: page.pageTitle,
         sections: data.page_titles,
-        selectedPage: data.selectedPageId,
-        pages: data.pageSections,
+        selectedPage: page.id,
+        pages: data.pages,
         //user: false
         user: data.user,
         languages: data.languages,
         contentTypes: data.contentTypes
     });
 });
-
-const x = "additional";
 
 module.exports = router;
