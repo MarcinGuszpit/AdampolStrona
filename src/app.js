@@ -26,7 +26,7 @@ app.use(session({
 }));
 app.use(csrfProtection);
 
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken();
     next();
 })
@@ -51,7 +51,14 @@ app.get('/template_test', (req, res) => {
 })
 
 app.use((req, res, next) => {
-    res.status(404).send('Eror 404');
+    res.status(404).render('error-custom-msg.ejs', {
+        error:  {
+            title: 'Błąd 404',
+            msg: 'Wybrana strona nie istnieje!',
+        },
+        title: null,
+        info: null
+    });
 })
 
 app.listen(4580);
