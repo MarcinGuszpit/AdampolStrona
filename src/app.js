@@ -36,25 +36,38 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 app.use(adminRoutesAdditionalSettings);
 app.use(adminRoutesTexts);
-app.use(mainRoutes);
 app.use(adminRoutes);
+app.use(mainRoutes);
 
 app.get('/template_test', (req, res) => {
     console.log(data.user)
+    const page = {
+        id: 'ustawienia',
+        link: 'settings',
+        menuTitle: 'Ustawienia',
+        pageTitle: 'Administrator - ustawnienia',
+        subTitle: 'Dodatkowe ustawienia aplikacji',
+        description: 'Inne ustawienia aplikacji, które możesz zmieniać'
+    };
+
     res.render('index.ejs',
         {
+            page,
             pageTitle: 'To jest tytuł strony',
             sections: data.page_titles,
-            selectedPage: data.selectedPageId,
-            pages: data.pageSections,
+            selectedPage: page.id,
+            pages: data.pages,
             //user: false
-            user: data.user
+            user: data.user,
+            languages: data.languages,
+            contentTypes: data.contentTypes
+            //user: false
         });
 })
 
 app.use((req, res, next) => {
     res.status(404).render('error-custom-msg.ejs', {
-        error:  {
+        error: {
             title: 'Błąd 404',
             msg: 'Wybrana strona nie istnieje!',
         },
