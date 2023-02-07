@@ -1,0 +1,17 @@
+<%- include('./../includes/top.ejs') %>
+
+<%- include('./../includes/navbar.ejs') %>
+
+<article class="section">
+    <h2 class="section-title"><%= subTitle %></h2>
+    <p class="section-subtitle"><%= description %></p>
+    <div>
+        <a href="/texts/add-new" class="btn normal">Dodaj nowy element tekstowy</a>
+    </div>
+
+    <%- include('./text-list.ejs') %>
+
+</article>
+
+
+<%- include('./../includes/bottom.ejs') %>

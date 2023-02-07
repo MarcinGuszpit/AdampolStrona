@@ -13,41 +13,30 @@ const pages = [
         link: 'page-sections/list',
         menuTitle: 'Sekcje strony głównej',
         pageTitle: 'Administrator - sekcje strony głównej',
-        description: 'Lista wszystkich sekcji strony głównej',
-        subTitle: 'Sekcje strony głównej'
     },
     {
         id: 'html',
         link: 'html/list',
         menuTitle: 'HTML',
         pageTitle: 'Administrator - html',
-        subTitle: 'Fragmenty kodu HTML',
-        description: 'Fragmenty kodu HTML. który możesz wykorzystać w swojej aplikacji',
-
     },
     {
         id: 'texts',
         link: 'texts/list',
         menuTitle: 'Teksty',
         pageTitle: 'Administrator - teksty',
-        subTitle: 'Zawartość tekstowa',
-        description: 'Zawartość tekstowa, którą możesz wypełnić swoją stronę.',
     },
     {
         id: 'galleries',
         link: 'galleries/list',
         menuTitle: 'Galerie',
         pageTitle: 'Administrator - galerie',
-        subTitle: 'Galerie obrazów',
-        description: 'Galerie obrazów do wykorzystania na stronie'
     },
     {
         id: 'additional',
         link: 'additional-settings',
         menuTitle: 'Dodatkowe',
         pageTitle: 'Administrator - dodatkowe tablice',
-        subTitle: 'Dodatkowe tabele używane w aplikacji',
-        description: 'Tutaj inne tabele, z których korzysta aplikacja'
     },
 
 ]
@@ -78,6 +67,31 @@ const languages = [
         flagImg: '/flags/ru_small.png'
     },
 ];
+
+const texts = [
+    {
+        id: 1,
+        description: 'to jest jakiś tekst',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, at deserunt doloribus dolorum et' +
+            '                exercitationem expedita facere illo illum impedit labore molestias natus non optio' +
+            '                possimus quos sequi ullam unde'
+    },
+    {
+        id: 2,
+        description: 'to jest jakiś tekst',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, at deserunt doloribus dolorum et' +
+            '                exercitationem expedita facere illo illum impedit labore molestias natus non optio' +
+            '                possimus quos sequi ullam unde'
+    },
+    {
+        id: 3,
+        description: 'to jest jakiś tekst',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, at deserunt doloribus dolorum et' +
+            '                exercitationem expedita facere illo illum impedit labore molestias natus non optio' +
+            '                possimus quos sequi ullam unde'
+    },
+
+]
 
 const mainPageSections = [
     {
@@ -114,6 +128,7 @@ module.exports = {
     pages,
     contentTypes,
     languages,
+    texts,
     selectedPageId: 'ustawienia',
     document_title,
     user: {

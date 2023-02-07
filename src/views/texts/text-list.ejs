@@ -1,0 +1,32 @@
+<div>
+
+    <table class="data-table">
+        <thead>
+        <tr>
+            <% for (const headerValue of Object.values(txtHeaders)) { %>
+                <th><%= headerValue %></th>
+            <% } %>
+
+            <% if (showButtons) { %>
+                <th>Operacje</th>
+            <% } %>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (const text of txtData) { %>
+            <tr>
+                <% for (const headerKey of Object.keys(txtHeaders)) { %>
+                    <td class="desc"><%= text[headerKey] %></td>
+                <% } %>
+                <% if (showButtons) { %>
+                    <td class="operations">
+                        <a href="edit/<%= text.id %>" class="btn edit">Edytuj</a>
+                        <button class="btn remove" data-element="<%= text.id %>">Usuń</button>
+                    </td>
+                <% } %>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+
+</div>

@@ -1,7 +1,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
-const {check, validationResult} = require('express-validator/check');
+const {check, validationResult} = require('express-validator');
 
 
 const router = express.Router();
