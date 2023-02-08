@@ -8,12 +8,21 @@
     <form class="form" action="/texts/add-new" method="post">
         <h3 class="element-title">Dodawanie/edycja tekstu</h3>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="id" value="<%= data.id %>">
+        <input type="hidden" name="state" value="<%= state %>">
         <label class="form-label">Opis</label>
-        <input class="form-input" type="text" name="description">
+        <input class="form-input" type="text" name="description" value="<%= data.description %>">
+        <% if (errors && errors.description && errors.description != '') { %>
+            <div class="form-error"><%= errors.description %></div>
+        <% } %>
         <label class="form-label">Tekst</label>
-        <textarea class="form-input" cols="10" rows="10" name="text"></textarea>
+        <textarea class="form-input" cols="10" rows="10" name="text"><%= data.text %></textarea>
+        <% if (errors && errors.text && errors.text != '') { %>
+            <div class="form-error"><%= errors.text %></div>
+        <% } %>
+
         <div class="button-row">
-            <input class="btn remove" type="submit" value="Zapisz" name="save">
+            <input class="btn remove" type="submit" value="Zapisz">
         </div>
     </form>
 

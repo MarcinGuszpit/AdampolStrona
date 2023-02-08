@@ -1,6 +1,8 @@
 const express = require('express');
 const data = require("../model/data");
 const {check, validationResult} = require('express-validator');
+const {extractErrors, getObjectFromRequestParams} = require("../utils/utils");
+const {saveText} = require("../controller/texts");
 
 const router = express.Router();
 
@@ -19,6 +21,11 @@ const pagesAdditionalText = {
     }
 }
 
+const headers = {
+    description: 'Opis',
+    text: 'Tekst'
+};
+
 const app_states = {
     NEW: 'adding new element',
     EDIT: 'editing existing element',
@@ -31,20 +38,6 @@ const page = (data.pages).find((elem) => {
 });
 
 router.get('/texts/list', (req, res, next) => {
-
-    console.log('---------------------------------');
-    console.log(req.route);
-    console.log(req.method);
-
-    const headers = {
-        description: 'Opis',
-        text: 'Tekst'
-    };
-
-    //console.log(Object.keys(headers));
-    //console.log(Object.values(headers));
-    console.log('---------------------------------');
-    //console.log(data.texts)
 
 
     res.render('texts/texts-settings.ejs', {
@@ -63,26 +56,72 @@ router.get('/texts/list', (req, res, next) => {
     });
 });
 
-router.use('/texts/add-new', check('description').notEmpty(), check('text').notEmpty(), (req, res, next) => {
+router.use('/texts/add-new',
+    check('description').notEmpty().withMessage('brak opisu '),
+    check('text').notEmpty().withMessage('brak wpisu tekstowego'),
+    (req, res, next) => {
 
-    //console.log(req.body);
-    console.log(req.method);
-    const errors = validationResult(req);
-    console.log(errors);
+        const textObj = {
+            id: '',
+            description: '',
+            text: '',
+        }
 
-    res.render('texts/text-edit-new.ejs', {
-        page,
-        state: app_states.NEW,
-        subTitle: pagesAdditionalText.NEW.subTitle,
-        description: pagesAdditionalText.NEW.description,
-        pageTitle: page.pageTitle,
-        selectedPage: page.id,
-        pages: data.pages,
-        user: data.user,
+        if (req.method === 'POST') {
+
+            const valErrors = validationResult(req).array();
+
+            if (valErrors.length === 0) {
+                saveText(getObjectFromRequestParams(req, true));
+                res.redirect('/texts/list');
+
+            } else {
+
+                const errors = extractErrors(valErrors, headers);
+                res.render('texts/text-edit-new.ejs', {
+                    page,
+                    data: getObjectFromRequestParams(req, true),
+                    errors,
+                    state: app_states.NEW,
+                    subTitle: pagesAdditionalText.NEW.subTitle,
+                    description: pagesAdditionalText.NEW.description,
+                    pageTitle: page.pageTitle,
+                    selectedPage: page.id,
+                    pages: data.pages,
+                    user: data.user,
+                });
+            }
+
+
+        }
+
+        if (req.method === 'GET') {
+
+            res.render('texts/text-edit-new.ejs', {
+                page,
+                data: textObj,
+                errors: {description: '', text: ''},
+                state: app_states.NEW,
+                subTitle: pagesAdditionalText.NEW.subTitle,
+                description: pagesAdditionalText.NEW.description,
+                pageTitle: page.pageTitle,
+                selectedPage: page.id,
+                pages: data.pages,
+                user: data.user,
+            });
+
+
+        }
+
+        //console.log(req.body);
+
+
     });
-});
 
 router.use('/texts/edit/:id', (req, res, next) => {
+
+    console.log(req.params);
+
     res.render('texts/text-edit-new.ejs', {
         page,
         state: app_states.EDIT,
