@@ -1,5 +1,7 @@
 const express = require('express');
 const data = require("../model/data");
+const {check, validationResult} = require('express-validator');
+
 const router = express.Router();
 
 const pagesAdditionalText = {
@@ -28,17 +30,21 @@ const page = (data.pages).find((elem) => {
     return (elem.id === 'texts');
 });
 
-router.use('/texts/list', (req, res, next) => {
+router.get('/texts/list', (req, res, next) => {
 
+    console.log('---------------------------------');
+    console.log(req.route);
+    console.log(req.method);
 
     const headers = {
         description: 'Opis',
         text: 'Tekst'
     };
 
-    console.log(Object.keys(headers));
-    console.log(Object.values(headers));
-    console.log(data.texts)
+    //console.log(Object.keys(headers));
+    //console.log(Object.values(headers));
+    console.log('---------------------------------');
+    //console.log(data.texts)
 
 
     res.render('texts/texts-settings.ejs', {
@@ -57,9 +63,12 @@ router.use('/texts/list', (req, res, next) => {
     });
 });
 
-router.use('/texts/add-new', (req, res, next) => {
+router.use('/texts/add-new', check('description').notEmpty(), check('text').notEmpty(), (req, res, next) => {
 
-    console.log(req.body);
+    //console.log(req.body);
+    console.log(req.method);
+    const errors = validationResult(req);
+    console.log(errors);
 
     res.render('texts/text-edit-new.ejs', {
         page,
