@@ -2,7 +2,7 @@ const express = require('express');
 const data = require("../model/data");
 const {check, validationResult} = require('express-validator');
 const {extractErrors, getObjectFromRequestParams} = require("../utils/utils");
-const {saveText} = require("../controller/texts");
+const {saveText, getAllTexts, getText} = require("../controller/texts");
 
 const router = express.Router();
 
@@ -51,7 +51,7 @@ router.get('/texts/list', (req, res, next) => {
 
         txtHeaders: headers,
         showButtons: true,
-        txtData: data.texts
+        txtData: getAllTexts()
 
     });
 });
@@ -91,8 +91,6 @@ router.use('/texts/add-new',
                     user: data.user,
                 });
             }
-
-
         }
 
         if (req.method === 'GET') {
@@ -109,29 +107,42 @@ router.use('/texts/add-new',
                 pages: data.pages,
                 user: data.user,
             });
-
-
         }
 
-        //console.log(req.body);
+    });
+
+router.use('/texts/edit/:id',
+    check('description').notEmpty().withMessage('brak opisu '),
+    check('text').notEmpty().withMessage('brak wpisu tekstowego'),
+    (req, res, next) => {
+
+        console.log(req.params);
+        const {id} = {...req.params};
+        let textObj = getText(id);
+        if (textObj) {
+            res.render('texts/text-edit-new.ejs', {
+                page,
+                data: textObj,
+                errors: {description: '', text: ''},
+                state: app_states.EDIT,
+                pageTitle: page.pageTitle,
+                subTitle: pagesAdditionalText.EDIT.subTitle,
+                description: pagesAdditionalText.EDIT.description,
+                selectedPage: page.id,
+                pages: data.pages,
+                user: data.user,
+            });
+
+
+        } else {
+            res.render('error-custom-msg.ejs', {
+                error: null,
+                title: 'Brak wybranego elementu!',
+                info: 'Element wybrany do edycji nie istnieje!'
+            });
+        }
 
 
     });
-
-router.use('/texts/edit/:id', (req, res, next) => {
-
-    console.log(req.params);
-
-    res.render('texts/text-edit-new.ejs', {
-        page,
-        state: app_states.EDIT,
-        pageTitle: page.pageTitle,
-        subTitle: pagesAdditionalText.EDIT.subTitle,
-        description: pagesAdditionalText.EDIT.description,
-        selectedPage: page.id,
-        pages: data.pages,
-        user: data.user,
-    });
-});
 
 module.exports = router;

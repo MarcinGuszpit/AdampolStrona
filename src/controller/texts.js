@@ -1,18 +1,23 @@
+const data = require("../model/data");
+
 function saveText(text) {
     console.log(text);
     console.log('saving text');
 }
 
 function getText(idText) {
-    console.log('get text');
+    const text = data.texts.find((text) => {
+        return (idText === text.id);
+    })
+    return text;
 }
 
-function listTexts() {
-    console.log('list texts');
+function getAllTexts() {
+    return data.texts;
 }
 
 module.exports = {
     saveText,
     getText,
-    listTexts
+    getAllTexts
 }

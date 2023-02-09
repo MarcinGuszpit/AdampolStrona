@@ -70,25 +70,25 @@ const languages = [
 
 const texts = [
     {
-        id: 1,
-        description: 'to jest jakiś tekst',
+        id: '1',
+        description: '1-szy tekst',
         text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, at deserunt doloribus dolorum et' +
-            '                exercitationem expedita facere illo illum impedit labore molestias natus non optio' +
-            '                possimus quos sequi ullam unde'
+            ' exercitationem expedita facere illo illum impedit labore molestias natus non optio' +
+            ' possimus quos sequi ullam unde'
     },
     {
-        id: 2,
-        description: 'to jest jakiś tekst',
+        id: '2',
+        description: 'Drugi tekst',
         text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, at deserunt doloribus dolorum et' +
-            '                exercitationem expedita facere illo illum impedit labore molestias natus non optio' +
-            '                possimus quos sequi ullam unde'
+            ' exercitationem expedita facere illo illum impedit labore molestias natus non optio' +
+            ' possimus quos sequi ullam unde'
     },
     {
-        id: 3,
-        description: 'to jest jakiś tekst',
+        id: '3',
+        description: 'Tekst 3',
         text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, at deserunt doloribus dolorum et' +
-            '                exercitationem expedita facere illo illum impedit labore molestias natus non optio' +
-            '                possimus quos sequi ullam unde'
+            ' exercitationem expedita facere illo illum impedit labore molestias natus non optio' +
+            ' possimus quos sequi ullam unde'
     },
 
 ]
