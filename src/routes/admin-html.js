@@ -1,16 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const {renderAllHTML, renderAddNewHTML, renderEditHTML} = require('../controller/html-controller')
 
-router.use('/html-fragments/list', (req, res, next) => {
-    res.send('html fragments');
-});
+router.use('/html/list', renderAllHTML);
 
-router.use('/html-fragments/add-new', (req, res, next) => {
-    res.send('add new html fragments');
-});
+router.use('/html/add-new', renderAddNewHTML);
 
-router.use('/html-fragments/edit/:id', (req, res, next) => {
-    res.send('html fragments');
-});
+router.use('/html/edit/:id', renderEditHTML);
 
 module.exports = router;

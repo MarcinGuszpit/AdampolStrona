@@ -1,3 +1,7 @@
+const data = require("../model/data");
+const {app_states} = require("./enums");
+const {getText} = require("../model/texts-model");
+
 function extractErrors(errorsObj, headers) {
     let results = {};
     for (const key of Object.keys(headers)) {
@@ -19,6 +23,16 @@ function extractErrors(errorsObj, headers) {
 
 }
 
+function getObject(appState, request, objFields) {
+    let obj = createEmptyObject(objFields);
+
+    if (appState === app_states.EDIT) {
+        const {id} = {...request.params};
+        obj = getText(id);
+    }
+    return obj;
+}
+
 function getObjectFromRequestParams(req, removeAdditionalFields) {
     const obj = {...req.body};
     if (removeAdditionalFields) {
@@ -29,7 +43,27 @@ function getObjectFromRequestParams(req, removeAdditionalFields) {
 }
 
 
+function findPage(pageId) {
+    return (data.pages).find((elem) => {
+        return (elem.id === pageId);
+    });
+}
+
+function createEmptyObject(objectFileds) {
+    const obj = {};
+    if (objectFileds && Array.isArray(objectFileds) && objectFileds.length > 0) {
+        objectFileds.forEach(field => {
+            obj[field] = '';
+        });
+    }
+    return obj;
+}
+
+
 module.exports = {
     extractErrors,
-    getObjectFromRequestParams
+    getObjectFromRequestParams,
+    createEmptyObject,
+    findPage,
+    getObject
 }

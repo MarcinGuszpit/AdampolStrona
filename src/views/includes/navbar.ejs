@@ -15,9 +15,9 @@
                 <% } %>
             </div>
             <ul class="navbar-menu">
-                <% for (const page of pages) { %>
-                    <li class="menu-item <%= page.id === selectedPage ? 'selected' : '' %>">
-                        <a href="/<%= page.link %>" class="menu-link"><%= page.menuTitle %></a>
+                <% for (const elem of pages) { %>
+                    <li class="menu-item <%= elem.id === page.id ? 'selected' : '' %>">
+                        <a href="/<%= elem.link %>" class="menu-link"><%= elem.menuTitle %></a>
                     </li>
                 <% } %>
             </ul>

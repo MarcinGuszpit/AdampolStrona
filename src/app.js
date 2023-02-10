@@ -10,6 +10,7 @@ const mainRoutes = require('./routes/main');
 const adminRoutes = require('./routes/admin');
 const adminRoutesAdditionalSettings = require('./routes/admin-settings');
 const adminRoutesTexts = require('./routes/admin-texts');
+const adminRoutesHTML = require('./routes/admin-html');
 
 const app = express();
 const csrfProtection = csrf();
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'static')));
 
 app.use(adminRoutesAdditionalSettings);
 app.use(adminRoutesTexts);
+app.use(adminRoutesHTML);
 app.use(adminRoutes);
 app.use(mainRoutes);
 
@@ -57,11 +59,9 @@ app.get('/template_test', (req, res) => {
             sections: data.page_titles,
             selectedPage: page.id,
             pages: data.pages,
-            //user: false
             user: data.user,
             languages: data.languages,
             contentTypes: data.contentTypes
-            //user: false
         });
 })
 

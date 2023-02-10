@@ -1,14 +1,6 @@
 const page_titles = ['Ustawienia', 'HTML', 'Galerie', 'Podstrony', 'Języki', 'Dodatkowe'];
 const pages = [
     {
-        id: 'ustawienia',
-        link: 'settings',
-        menuTitle: 'Ustawienia',
-        pageTitle: 'Administrator - ustawnienia',
-        subTitle: 'Dodatkowe ustawienia aplikacji',
-        description: 'Inne ustawienia aplikacji, które możesz zmieniać'
-    },
-    {
         id: 'pageSections',
         link: 'page-sections/list',
         menuTitle: 'Sekcje strony głównej',
@@ -91,7 +83,25 @@ const texts = [
             ' possimus quos sequi ullam unde'
     },
 
-]
+];
+
+const htmls = [
+    {
+        id: '1',
+        description: 'fragment HTML',
+        html: '<p>Hello world!</p>'
+    },
+    {
+        id: '2',
+        description: 'drugi fragment HTML',
+        html: '<p>Lorem ipsum</p>'
+    },
+    {
+        id: '3',
+        description: '3 frag. HTML',
+        html: '<div><ul><li>el.listy 1</li><li>el.listy 2</li><li>el.listy 3</li><li>el.listy 4</li></ul></div>'
+    },
+];
 
 const mainPageSections = [
     {
@@ -129,6 +139,7 @@ module.exports = {
     contentTypes,
     languages,
     texts,
+    htmls,
     selectedPageId: 'ustawienia',
     document_title,
     user: {

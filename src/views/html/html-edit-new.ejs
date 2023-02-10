@@ -5,8 +5,8 @@
     <h2 class="section-title"><%= subTitle %></h2>
     <p class="section-subtitle"><%= description %></p>
 
-    <form class="form" action="/texts/add-new" method="post">
-        <h3 class="element-title">Dodawanie/edycja tekstu</h3>
+    <form class="form" action="/html/add-new" method="post">
+        <h3 class="element-title">Dodawanie/edycja fragmentu HTML</h3>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <input type="hidden" name="id" value="<%= data.id %>">
         <label class="form-label">Opis</label>
@@ -14,10 +14,10 @@
         <% if (errors && errors.description && errors.description != '') { %>
             <div class="form-error"><%= errors.description %></div>
         <% } %>
-        <label class="form-label">Tekst</label>
-        <textarea class="form-input" cols="10" rows="10" name="text"><%= data.text %></textarea>
-        <% if (errors && errors.text && errors.text != '') { %>
-            <div class="form-error"><%= errors.text %></div>
+        <label class="form-label">Fragment HTML</label>
+        <textarea class="form-input" cols="10" rows="10" name="text"><%= data.html %></textarea>
+        <% if (errors && errors.html && errors.html != '') { %>
+            <div class="form-error"><%= errors.html %></div>
         <% } %>
 
         <div class="button-row">
