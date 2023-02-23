@@ -1,5 +1,4 @@
 const data = require("../model/data");
-const {getAllTexts, addNewText} = require("../model/texts-model");
 const {findPage, getObjectFromRequestParams, extractErrors, getObject} = require("../utils/utils");
 const {addNewHTML, saveHTML, getHTML, getAll} = require('../model/htmls-model');
 const {app_states} = require("../utils/enums");
@@ -38,17 +37,18 @@ function renderAllHTML(req, res, next) {
         user: data.user,
         txtHeaders: headers,
         showButtons: true,
-        txtData: getAll()
+        data: getAll()
     });
 }
 
 function renderAddNewHTML(req, res, next) {
     const obj = getObject(app_states.NEW, req, objFields);
+    console.log(obj);
     if (req.method === 'POST') {
 
-        const valErrors = validationResult(req).array();
+    const valErrors = validationResult(req).array();
         if (valErrors.length === 0) {
-            addNewText(getObjectFromRequestParams(req, true));
+            addNewHTML(getObjectFromRequestParams(req, true));
             res.redirect('/html/list');
 
         } else {
@@ -64,8 +64,8 @@ function renderAddNewHTML(req, res, next) {
             });
         }
     }
-
     if (req.method === 'GET') {
+
 
         res.render('html/html-edit-new.ejs', {
             page,

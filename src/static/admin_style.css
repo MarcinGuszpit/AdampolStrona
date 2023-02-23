@@ -277,7 +277,7 @@
     font-style: italic;
     font-weight: lighter;
     padding: 0 0 20px;
-    border-bottom: 2px solid #fff
+    border-bottom: 2px solid #fff;
 }
 
 .login .form-label {
@@ -287,5 +287,35 @@
 
 .login .form-input {
     border: none
+}
+
+.html-element-list {
+    display: block;
+}
+
+.html-element-list .html-element {
+    margin-top: 45px;
+}
+
+.html-element-list .button-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.html-element-list .html-content {
+    border: 1px solid grey;
+    padding: 50px;
+    display: block;
+    font-family: monospace;
+    font-size: 16px;
+    background-color: whitesmoke;
+}
+
+
+.html-element-list .element-title {
+    padding: 10px 0 10px 5px;
+    border: 1px solid grey;
+    border-bottom: 0;
 }
 

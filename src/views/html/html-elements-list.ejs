@@ -1,0 +1,18 @@
+<div class="html-element-list">
+
+    <% for (const html of data) { %>
+
+        <div class="html-element">
+            <h3 class="element-title"><%= html.description %></h3>
+            <code class="html-content">
+                <%= html.html %>
+            </code>
+            <div class="button-wrapper">
+                <a href="edit/<%= html.id %>" class="btn edit">Edytuj</a>
+                <button class="btn remove" data-element="<%= html.id %>">Usuń</button>
+            </div>
+        </div>
+
+    <% } %>
+
+</div>

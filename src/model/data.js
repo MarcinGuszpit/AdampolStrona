@@ -99,7 +99,15 @@ const htmls = [
     {
         id: '3',
         description: '3 frag. HTML',
-        html: '<div><ul><li>el.listy 1</li><li>el.listy 2</li><li>el.listy 3</li><li>el.listy 4</li></ul></div>'
+        html:
+            `<div>
+                <ul>
+                    <li>el.listy 1</li>
+                    <li>el.listy 2</li>
+                    <li>el.listy 3</li>
+                    <li>el.listy 4</li>
+                </ul>
+            </div>`
     },
 ];
 
