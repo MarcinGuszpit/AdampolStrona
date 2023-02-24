@@ -41,7 +41,7 @@ function renderAllTexts(req, res, next) {
 }
 
 function renderAddNewText(req, res, next) {
-    const textObj = getObject(app_states.NEW, req, objFields);
+    const textObj = getObject(app_states.NEW, req, objFields, getText);
     if (req.method === 'POST') {
 
         const valErrors = validationResult(req).array();
@@ -97,7 +97,7 @@ function renderEditText(req, res, next) {
         }
     }
     if (req.method === 'GET') {
-        const textObj = getObject(app_states.EDIT, req, objFields);
+        const textObj = getObject(app_states.EDIT, req, objFields, getText);
         if (textObj) {
             res.render('texts/text-edit-new.ejs', {
                 page,

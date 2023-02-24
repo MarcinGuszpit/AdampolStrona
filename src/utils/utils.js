@@ -18,17 +18,15 @@ function extractErrors(errorsObj, headers) {
             results[resultsKeys[index]] = error.msg;
         }
     });
-
     return results;
-
 }
 
-function getObject(appState, request, objFields) {
+function getObject(appState, request, objFields, getObj) {
     let obj = createEmptyObject(objFields);
 
     if (appState === app_states.EDIT) {
         const {id} = {...request.params};
-        obj = getText(id);
+        obj = getObj(id);
     }
     return obj;
 }
