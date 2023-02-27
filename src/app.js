@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const csrf = require('csurf');
 const data = require('./model/data');
+const {mongoDbConnect} = require('./utils/database');
 //routes
 
 const mainRoutes = require('./routes/main');
@@ -76,4 +77,8 @@ app.use((req, res, next) => {
     });
 })
 
-app.listen(4580);
+mongoDbConnect(() => {
+    app.listen(4580);
+});
+
+

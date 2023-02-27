@@ -1,8 +1,15 @@
 const data = require("./data");
+const {getDataBase} = require('./../utils/database')
 
 function saveText(text) {
     console.log(text);
     console.log('saving text');
+    getDataBase().then((res) => {
+        console.log(res);
+    }).catch((error) => {
+            console.log(error)
+        }
+    )
 }
 
 function addNewText(text) {

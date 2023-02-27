@@ -41,6 +41,8 @@ function renderAllTexts(req, res, next) {
 }
 
 function renderAddNewText(req, res, next) {
+    console.log('new text');
+    console.log(getEmptyErrors(objFields));
     const textObj = getObject(app_states.NEW, req, objFields, getText);
     if (req.method === 'POST') {
 
@@ -78,6 +80,7 @@ function renderAddNewText(req, res, next) {
 }
 
 function renderEditText(req, res, next) {
+    console.log('edit text');
     if (req.method === 'POST') {
         const valErrors = validationResult(req).array();
         if (valErrors.length === 0) {
@@ -119,6 +122,50 @@ function renderEditText(req, res, next) {
     }
 }
 
+function render(req, res, next, appState, titles,saveMethod) {
+    const obj = getObject(appState, req, objFields, getText);
+    if (req.method === 'POST') {
+        const valErrors = validationResult(req).array();
+        if (valErrors.length === 0) {
+            const objToSave = getObjectFromRequestParams(req, true);
+            saveMethod(objToSave);
+            res.redirect('/texts/list');
+        } else {
+            const errors = extractErrors(valErrors, headers);
+            res.render('texts/text-edit-new.ejs', {
+                page,
+                data: getObjectFromRequestParams(req, true),
+                errors,
+                subTitle: titles.subTitle,
+                description: titles.description,
+                pages: data.pages,
+                user: data.user,
+            });
+        }
+    }
+    if (req.method === 'GET') {
+        res.render('texts/text-edit-new.ejs', {
+            page,
+            data: obj,
+            errors: getEmptyErrors(objFields),
+            subTitle: titles.subTitle,
+            description: titles.description,
+            pages: data.pages,
+            user: data.user,
+        });
+    }
+
+}
+
+function getEmptyErrors(objFields) {
+    const obj = {}
+    objFields.forEach(elem => {
+        if (!(elem === 'id')) {
+            obj[elem] = '';
+        }
+    });
+    return obj;
+}
 
 module.exports = {
     renderAllTexts,
