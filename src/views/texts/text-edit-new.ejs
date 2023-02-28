@@ -5,10 +5,11 @@
     <h2 class="section-title"><%= subTitle %></h2>
     <p class="section-subtitle"><%= description %></p>
 
-    <form class="form" action="/texts/add-new" method="post">
+    <form class="form" action="<%= (data._id && data._id !== '')?'/texts/edit/' + data._id:'/texts/add-new' %>"
+          method="post">
         <h3 class="element-title">Dodawanie/edycja tekstu</h3>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-        <input type="hidden" name="id" value="<%= data.id %>">
+        <input type="hidden" name="_id" value="<%= data._id %>">
         <label class="form-label">Opis</label>
         <input class="form-input" type="text" name="description" value="<%= data.description %>">
         <% if (errors && errors.description && errors.description != '') { %>

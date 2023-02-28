@@ -17,8 +17,6 @@ function mongoDbConnect(callback) {
 function getDataBase() {
     return new Promise((resolve, reject) => {
         if (db) {
-            console.log('db should exist');
-            console.log(db);
             resolve(db);
         }
         reject(new Error('No database found!!!'));

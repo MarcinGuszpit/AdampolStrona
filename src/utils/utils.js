@@ -25,8 +25,8 @@ function getObject(appState, request, objFields, getObj) {
     let obj = createEmptyObject(objFields);
 
     if (appState === app_states.EDIT) {
-        const {id} = {...request.params};
-        obj = getObj(id);
+        const {_id} = {...request.params};
+        obj = getObj(_id);
     }
     return obj;
 }
