@@ -5,6 +5,7 @@ const mongoClient = mongodb.MongoClient;
 let db;
 
 function mongoDbConnect(callback) {
+    console.log('connecting...');
     mongoClient.connect(databaseURL).then((client) => {
         console.log('connected');
         callback();

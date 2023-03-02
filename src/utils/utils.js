@@ -47,6 +47,17 @@ function findPage(pageId) {
     });
 }
 
+function emptyErrors(objFields) {
+    const obj = {}
+    objFields.forEach(elem => {
+        if (!(elem === '_id')) {
+            obj[elem] = '';
+        }
+    });
+    return obj;
+}
+
+
 function createEmptyObject(objectFileds) {
     const obj = {};
     if (objectFileds && Array.isArray(objectFileds) && objectFileds.length > 0) {
@@ -63,5 +74,6 @@ module.exports = {
     getObjectFromRequestParams,
     createEmptyObject,
     findPage,
-    getObject
+    getObject,
+    emptyErrors
 }

@@ -1,5 +1,5 @@
 const {app_states} = require("../utils/enums");
-const {createEmptyObject, extractErrors, findPage, getObjectFromRequestParams, getObject} = require("../utils/utils");
+const {createEmptyObject, extractErrors, findPage, getObjectFromRequestParams, emptyErrors} = require("../utils/utils");
 const {getAllTexts, getText, saveText, addNewText} = require("../model/texts-model");
 const {validationResult} = require("express-validator");
 const data = require('../model/data');
@@ -97,7 +97,7 @@ function render(req, res, next, appState, titles, saveMethod) {
                 res.render('texts/text-edit-new.ejs', {
                     page,
                     data: obj,
-                    errors: getEmptyErrors(objFields),
+                    errors: emptyErrors(objFields),
                     subTitle: titles.subTitle,
                     description: titles.description,
                     pages: data.pages,
@@ -113,16 +113,6 @@ function render(req, res, next, appState, titles, saveMethod) {
             });
         }
     });
-}
-
-function getEmptyErrors(objFields) {
-    const obj = {}
-    objFields.forEach(elem => {
-        if (!(elem === '_id')) {
-            obj[elem] = '';
-        }
-    });
-    return obj;
 }
 
 module.exports = {

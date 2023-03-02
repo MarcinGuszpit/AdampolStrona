@@ -13,6 +13,12 @@ const pages = [
         pageTitle: 'Administrator - html',
     },
     {
+        id: 'admin',
+        link: 'admin/list',
+        menuTitle: 'Administrator',
+        pageTitle: 'Administrator - dane administratora',
+    },
+    {
         id: 'texts',
         link: 'texts/list',
         menuTitle: 'Teksty',
