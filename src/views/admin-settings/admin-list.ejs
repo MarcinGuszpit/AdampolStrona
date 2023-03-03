@@ -4,7 +4,14 @@
 <article class="section">
     <h2 class="section-title"><%= subTitle %></h2>
     <p class="section-subtitle"><%= description %></p>
-    <div>
+    <div class="admin-data">
+        <label class="label">Nazwa użytkownika</label>
+        <span class="txt"><%= data.name %></span>
+        <label class="label">E-mail użytkownika</label>
+        <span class="txt"><%= data.email %></span>
+        <div class="button-row">
+            <input class="btn remove" type="submit" value="Zmień dane administratora">
+        </div>
     </div>
 
 </article>

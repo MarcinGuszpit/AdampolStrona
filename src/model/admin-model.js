@@ -10,7 +10,7 @@ function saveAdminData(adminData) {
 
 function getAdminData() {
     return getDataBase().then((db) => {
-        return db.collection('admin-settings').find().next();
+        return db.collection('admin-settings').findOne();
     });
 }
 

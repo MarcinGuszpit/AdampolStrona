@@ -3,6 +3,8 @@ const {getAllTexts} = require("../model/texts-model");
 const data = require("../model/data");
 const {findPage} = require("../utils/utils");
 
+const objFields = ['_id', 'name', 'email', 'password'];
+
 const pagesAdditionalText = {
     LIST: {
         subTitle: 'Dane administratora',
