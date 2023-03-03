@@ -12,6 +12,7 @@ const adminRoutes = require('./routes/admin');
 const adminRoutesAdditionalSettings = require('./routes/admin-settings');
 const adminRoutesTexts = require('./routes/admin-texts');
 const adminRoutesHTML = require('./routes/admin-html');
+const {appKey} = require("./settings/settings");
 
 const app = express();
 const csrfProtection = csrf();
@@ -23,7 +24,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(session({
-    secret: 'To_jest_jakiś_sekretny_klucz_QWZx!23#',
+    secret: appKey,
     resave: false,
     saveUninitialized: false
 }));
@@ -42,29 +43,29 @@ app.use(adminRoutesHTML);
 app.use(adminRoutes);
 app.use(mainRoutes);
 
-app.get('/template_test', (req, res) => {
-    console.log(data.user)
-    const page = {
-        id: 'ustawienia',
-        link: 'settings',
-        menuTitle: 'Ustawienia',
-        pageTitle: 'Administrator - ustawnienia',
-        subTitle: 'Dodatkowe ustawienia aplikacji',
-        description: 'Inne ustawienia aplikacji, które możesz zmieniać'
-    };
-
-    res.render('index.ejs',
-        {
-            page,
-            pageTitle: 'To jest tytuł strony',
-            sections: data.page_titles,
-            selectedPage: page.id,
-            pages: data.pages,
-            user: data.user,
-            languages: data.languages,
-            contentTypes: data.contentTypes
-        });
-})
+// app.get('/template_test', (req, res) => {
+//     console.log(data.user)
+//     const page = {
+//         id: 'ustawienia',
+//         link: 'settings',
+//         menuTitle: 'Ustawienia',
+//         pageTitle: 'Administrator - ustawnienia',
+//         subTitle: 'Dodatkowe ustawienia aplikacji',
+//         description: 'Inne ustawienia aplikacji, które możesz zmieniać'
+//     };
+//
+//     res.render('index.ejs',
+//         {
+//             page,
+//             pageTitle: 'To jest tytuł strony',
+//             sections: data.page_titles,
+//             selectedPage: page.id,
+//             pages: data.pages,
+//             user: data.user,
+//             languages: data.languages,
+//             contentTypes: data.contentTypes
+//         });
+// })
 
 app.use((req, res, next) => {
     res.status(404).render('error-custom-msg.ejs', {

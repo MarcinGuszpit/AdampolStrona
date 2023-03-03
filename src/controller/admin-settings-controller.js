@@ -1,4 +1,4 @@
-const {getAdminData, saveAdminData} = require("../model/admin-model");
+const {getAdminData, saveAdminData, getBasicAdminData} = require("../model/admin-model");
 const {getAllTexts} = require("../model/texts-model");
 const data = require("../model/data");
 const {findPage} = require("../utils/utils");
@@ -19,7 +19,7 @@ const pagesAdditionalText = {
 const page = findPage('admin');
 
 function showAdminSettings(req, res, next) {
-    getAdminData().then((results) => {
+    getBasicAdminData().then((results) => {
         res.render('admin-settings/admin-list.ejs', {
             page,
             subTitle: pagesAdditionalText.LIST.subTitle,
@@ -38,7 +38,23 @@ function showAdminSettings(req, res, next) {
 }
 
 function editAdminSettings(req, res, next) {
+
+
     res.send('Edycja admin');
+}
+
+function render(req, res, next, appState, titles, saveMethod) {
+    const {_id} = {...req.params};
+    getBasicAdminData().then((result) => {
+        if (req.method === 'GET') {
+           res.render('admin-settings/admin-edit.ejs',{
+
+           });
+        }
+        if (req.method === 'POST') {
+
+        }
+    });
 }
 
 module.exports = {

@@ -1,11 +1,40 @@
 <%- include('./../includes/top.ejs') %>
 <%- include('./../includes/navbar.ejs') %>
 
+
 <article class="section">
     <h2 class="section-title"><%= subTitle %></h2>
     <p class="section-subtitle"><%= description %></p>
-    <div>
-    </div>
+
+    <form class="form" action="/admin/edit" method="post">
+        <h3 class="element-title">Edycja danych administratora</h3>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="_id" value="<%= data._id %>">
+        <label class="form-label">Nazwa</label>
+        <input class="form-input" type="text" name="name" value="<%= data.name %>">
+        <% if (errors && errors.name && errors.name != '') { %>
+            <div class="form-error"><%= errors.name %></div>
+        <% } %>
+        <label class="form-label">E-mail/login do systemu</label>
+        <input class="form-input" type="text" name="email" value="<%= data.email %>">
+        <% if (errors && errors.email && errors.email != '') { %>
+            <div class="form-error"><%= errors.email %></div>
+        <% } %>
+
+        <label class="form-label">Nowe hasło</label>
+        <input class="form-input" type="password" name="password" value="<%= data.password %>">
+        <% if (errors && errors.password && errors.password != '') { %>
+            <div class="form-error"><%= errors.password %></div>
+        <% } %>
+
+        <label class="form-label">Powtórz nowe hasło</label>
+        <input class="form-input" type="password" name="password_new" value="<%= data.password_new %>">
+
+        <div class="button-row">
+            <input class="btn remove" type="submit" value="Zapisz zmiany">
+        </div>
+    </form>
+
 
 </article>
 
