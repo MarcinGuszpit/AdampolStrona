@@ -6,6 +6,6 @@ router.use('/html/list', renderAllHTML);
 
 router.use('/html/add-new', renderAddNewHTML);
 
-router.use('/html/edit/:id', renderEditHTML);
+router.use('/html/edit/:_id', renderEditHTML);
 
 module.exports = router;

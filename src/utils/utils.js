@@ -36,6 +36,7 @@ function getObjectFromRequestParams(req, removeAdditionalFields) {
     if (removeAdditionalFields) {
         delete obj._csrf;
         delete obj.state;
+        delete obj.new_password;
     }
     return obj;
 }

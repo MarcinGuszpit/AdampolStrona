@@ -28,8 +28,11 @@
         <% } %>
 
         <label class="form-label">Powtórz nowe hasło</label>
-        <input class="form-input" type="password" name="password_new" value="<%= data.password_new %>">
-
+        <input class="form-input" type="password" name="new_password" value="<%= data.new_password %>">
+        <% if (errors && errors.new_password && errors.new_password != '') { %>
+            <div class="form-error"><%= errors.new_password %></div>
+        <% } %>
+        <label class="label-warning">Zmiana danych administatora spowoduje wylogowanie z serwisu!</label>
         <div class="button-row">
             <input class="btn remove" type="submit" value="Zapisz zmiany">
         </div>

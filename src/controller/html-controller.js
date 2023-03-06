@@ -1,11 +1,11 @@
 const data = require("../model/data");
-const {findPage, getObjectFromRequestParams, extractErrors, getObject} = require("../utils/utils");
-const {addNewHTML, saveHTML, getHTML, getAll} = require('../model/htmls-model');
+const {findPage, getObjectFromRequestParams, extractErrors, getObject, createEmptyObject, emptyErrors} = require("../utils/utils");
+const {addNewHTML, saveHTML, getHTML, getAllHTMLs} = require('../model/htmls-model');
 const {app_states} = require("../utils/enums");
 const {validationResult} = require("express-validator");
-const {saveText} = require("../model/texts-model");
+const {saveText, getAllTexts, getText} = require("../model/texts-model");
 
-const objFields = ['id', 'description', 'html'];
+const objFields = ['_id', 'description', 'html'];
 
 const pagesAdditionalText = {
     LIST: {
@@ -24,102 +24,89 @@ const pagesAdditionalText = {
 
 const page = findPage('html');
 
-const headers = {
-    description: 'Opis',
-    text: 'Fragment HTML'
-};
-
 function renderAllHTML(req, res, next) {
-    res.render('html/html-list.ejs', {
-        page,
-        subTitle: pagesAdditionalText.LIST.subTitle,
-        description: pagesAdditionalText.LIST.description,
-        pages: data.pages,
-        user: data.user,
-        txtHeaders: headers,
-        showButtons: true,
-        data: getAll()
+    getAllHTMLs().then((results) => {
+        res.render('html/html-list.ejs', {
+            page,
+            subTitle: pagesAdditionalText.LIST.subTitle,
+            description: pagesAdditionalText.LIST.description,
+            pages: data.pages,
+            user: data.user,
+            data: results
+        });
+    }).catch(() => {
+        res.render('error-custom-msg.ejs', {
+            error: null,
+            title: 'Nie udało się pobrać listy elementów!',
+            info: 'Wystąpił błąd dostępu do bazy danych!'
+        });
     });
 }
 
 function renderAddNewHTML(req, res, next) {
-    const obj = getObject(app_states.NEW, req, objFields, getHTML);
-    if (req.method === 'POST') {
-
-        const valErrors = validationResult(req).array();
-        if (valErrors.length === 0) {
-            addNewHTML(getObjectFromRequestParams(req, true));
-            res.redirect('/html/list');
-
-        } else {
-            const errors = extractErrors(valErrors, headers);
-            res.render('html/html-edit-new.ejs', {
-                page,
-                data: getObjectFromRequestParams(req, true),
-                errors,
-                subTitle: pagesAdditionalText.NEW.subTitle,
-                description: pagesAdditionalText.NEW.description,
-                pages: data.pages,
-                user: data.user,
-            });
-        }
-    }
-
-    if (req.method === 'GET') {
-        console.log(obj);
-        res.render('html/html-edit-new.ejs', {
-            page,
-            data: obj,
-            errors: {description: '', html: ''},
-            subTitle: pagesAdditionalText.EDIT.subTitle,
-            description: pagesAdditionalText.EDIT.description,
-            pages: data.pages,
-            user: data.user,
-        });
-    }
-
+    render(req, res, next, app_states.NEW, pagesAdditionalText.NEW, addNewHTML);
 }
 
 function renderEditHTML(req, res, next) {
-    const htmlObj = getObject(app_states.EDIT, req, objFields, getHTML);
-    if (req.method === 'POST') {
-        const valErrors = validationResult(req).array();
-        if (valErrors.length === 0) {
-            saveHTML(getObjectFromRequestParams(req, true));
-            res.redirect('/html/list');
-        } else {
-            const errors = extractErrors(valErrors, headers);
-            res.render('html/html-edit-new.ejs', {
-                page,
-                data: getObjectFromRequestParams(req, true),
-                errors,
-                subTitle: pagesAdditionalText.NEW.subTitle,
-                description: pagesAdditionalText.NEW.description,
-                pages: data.pages,
-                user: data.user,
-            });
+    render(req, res, next, app_states.EDIT, pagesAdditionalText.EDIT, saveHTML);
+}
+
+function render(req, res, next, appState, titles, saveMethod) {
+
+    const {_id} = {...req.params};
+    getHTML(_id).then((result) => {
+        let obj = result;
+        if (appState === app_states.NEW) {
+            obj = createEmptyObject(objFields);
         }
-    }
-    if (req.method === 'GET') {
-        if (htmlObj) {
-            res.render('html/html-edit-new.ejs', {
-                page,
-                data: htmlObj,
-                errors: {description: '', html: ''},
-                subTitle: pagesAdditionalText.NEW.subTitle,
-                description: pagesAdditionalText.NEW.description,
-                pages: data.pages,
-                user: data.user,
-            });
+        if (obj) {
+            if (req.method === 'POST') {
+                const valErrors = validationResult(req).array();
+                if (valErrors.length === 0) {
+                    const objToSave = getObjectFromRequestParams(req, true);
+                    saveMethod(objToSave).then(() => {
+                        res.redirect('/html/list');
+                    }).catch(() => {
+                        res.render('error-custom-msg.ejs', {
+                            error: null,
+                            title: 'Nie udało się zapisać elementu!',
+                            info: 'Wystąpił błąd dostępu do bazy danych!'
+                        });
+                    });
+
+                } else {
+                    const errors = extractErrors(valErrors, emptyErrors(objFields));
+                    res.render('html/html-edit-new.ejs', {
+                        page,
+                        data: getObjectFromRequestParams(req, true),
+                        errors,
+                        subTitle: titles.subTitle,
+                        description: titles.description,
+                        pages: data.pages,
+                        user: data.user,
+                    });
+                }
+            }
+            if (req.method === 'GET') {
+                res.render('html/html-edit-new.ejs', {
+                    page,
+                    data: obj,
+                    errors: emptyErrors(objFields),
+                    subTitle: titles.subTitle,
+                    description: titles.description,
+                    pages: data.pages,
+                    user: data.user,
+                });
+            }
 
         } else {
             res.render('error-custom-msg.ejs', {
                 error: null,
-                title: 'Brak wybranego elementu!',
-                info: 'Element wybrany do edycji nie istnieje!'
+                title: 'Wystąpił błąd!',
+                info: 'Nie udało się utworzyć elementu do edycji!'
             });
         }
-    }
+    });
 }
 
 module.exports = {

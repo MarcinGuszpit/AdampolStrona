@@ -79,6 +79,15 @@
     background-color: #e0e0e0
 }
 
+.form .label-warning {
+    margin: 10px 0;
+    display: block;
+    width: 100%;
+    color: red;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
 .data-table {
     width: 100%;
     border: 1px solid gray;
@@ -319,7 +328,7 @@
     border-bottom: 0;
 }
 
-.admin-data  {
+.admin-data {
     margin: 70px 120px;
 }
 
