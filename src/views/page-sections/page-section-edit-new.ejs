@@ -1,0 +1,75 @@
+<%- include('./../includes/top.ejs') %>
+<%- include('./../includes/navbar.ejs') %>
+
+<article class="section">
+    <h2 class="section-title"><%= subTitle %></h2>
+    <p class="section-subtitle"><%= description %></p>
+
+    <form class="form" action="/page-sections/add-new" method="post">
+
+        <h3 class="element-title">Dodawanie/edycja sekcji strony głównej</h3>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="_id" value="<%= data._id %>">
+
+        <label class="form-label">Tytuł sekcji</label>
+        <input class="form-input" type="text" name="title" value="<%= data.title %>">
+        <% if (errors && errors.title && errors.title != '') { %>
+            <div class="form-error"><%= errors.title %></div>
+        <% } %>
+
+        <label class="form-label">Nazwa w menu nawigacji</label>
+        <input class="form-input" type="text" name="nav_title" value="<%= data.nav_title %>">
+        <% if (errors && errors.nav_title && errors.nav_title != '') { %>
+            <div class="form-error"><%= errors.nav_title %></div>
+        <% } %>
+
+        <div data-field-name="contentType">
+            <label class="select-label">Typ zawartości </label>
+            <select class="form-select" name="content_type" data-content-selector="content-selector">
+                <% for (const contType of contentTypes) { %>
+                    <option value="<%= contType.id %>"><%= contType.description %></option>
+                <% } %>
+            </select>
+        </div>
+
+        <div class="value-selectors">
+            <div data-field-name="html-fragment">
+                <% if (htmls.length > 0) { %>
+                    <label class="select-label">Wybierz element HTML, który ma być umieszczony na podstronie: </label>
+                    <select class="form-select" name="html_id">
+                        <% for (const html of htmls) { %>
+                            <option value="<%= html._id %>"><%= html.description %></option>
+                        <% } %>
+                    </select>
+                <% } %>
+            </div>
+            <div data-field-name="text">
+                <% if (texts.length > 0) { %>
+                    <label class="select-label">Wybierz tekst, który ma być umieszczony na podstronie: </label>
+                    <select class="form-select" name="txt_id">
+                        <% for (const text of texts) { %>
+                            <option value="<%= text._id %>"><%= text.description %></option>
+                        <% } %>
+                    </select>
+                <% } %>
+            </div>
+            <div data-field-name="gallery">
+                <% if (galleries.length > 0) { %>
+                    <label class="select-label">Wybierz galerię: </label>
+                    <select class="form-select" name="gallery_id">
+                        <% for (const gallery of galleries) { %>
+                            <option value="<%= gallery._id %>"><%= gallery.name %></option>
+                        <% } %>
+                    </select>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="button-row">
+            <input class="btn remove" type="submit" value="Zapisz">
+        </div>
+    </form>
+
+</article>
+
+<%- include('./../includes/bottom.ejs') %>

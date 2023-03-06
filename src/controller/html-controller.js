@@ -1,9 +1,14 @@
 const data = require("../model/data");
-const {findPage, getObjectFromRequestParams, extractErrors, getObject, createEmptyObject, emptyErrors} = require("../utils/utils");
+const {
+    getObjectFromRequestParams,
+    extractErrors,
+    createEmptyObject,
+    emptyErrors,
+    findInArray
+} = require("../utils/utils");
 const {addNewHTML, saveHTML, getHTML, getAllHTMLs} = require('../model/htmls-model');
 const {app_states} = require("../utils/enums");
 const {validationResult} = require("express-validator");
-const {saveText, getAllTexts, getText} = require("../model/texts-model");
 
 const objFields = ['_id', 'description', 'html'];
 
@@ -22,7 +27,8 @@ const pagesAdditionalText = {
     }
 }
 
-const page = findPage('html');
+
+const page = findInArray('html', 'id', data.pages);
 
 function renderAllHTML(req, res, next) {
     getAllHTMLs().then((results) => {

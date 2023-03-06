@@ -1,5 +1,5 @@
 const {app_states} = require("../utils/enums");
-const {createEmptyObject, extractErrors, findPage, getObjectFromRequestParams, emptyErrors} = require("../utils/utils");
+const {createEmptyObject, extractErrors, findPage, getObjectFromRequestParams, emptyErrors, findInArray} = require("../utils/utils");
 const {getAllTexts, getText, saveText, addNewText} = require("../model/texts-model");
 const {validationResult} = require("express-validator");
 const data = require('../model/data');
@@ -25,7 +25,7 @@ const headers = {
     text: 'Tekst'
 };
 
-const page = findPage('texts');
+const page = findInArray('texts','id', data.pages);
 
 function renderAllTexts(req, res, next) {
     getAllTexts().then((results) => {

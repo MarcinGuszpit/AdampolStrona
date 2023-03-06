@@ -1,38 +1,25 @@
-const data = require("./data");
-const {getDataBase} = require('./../utils/database')
-const {ObjectId} = require("mongodb");
+const {deleteElement, saveElement, addNewElement, getElement, getAllElements} = require("./basic-crud-operations");
+
+const collectionName = 'texts';
 
 function deleteText(textId) {
-    return getDataBase().then((db) => {
-        return db.collection('texts').deleteOne({_id: new ObjectId(textId)});
-    });
+    return deleteElement(textId, collectionName);
 }
 
-
 function saveText(text) {
-    return getDataBase().then((db) => {
-        text._id = new ObjectId(text._id);
-        return db.collection('texts').updateOne({_id: text._id}, {$set: text});
-    });
+    return saveElement(text,collectionName);
 }
 
 function addNewText(text) {
-    return getDataBase().then((db) => {
-        delete text._id;
-        return db.collection('texts').insertOne(text);
-    });
+    return addNewElement(text,collectionName);
 }
 
 function getText(idText) {
-    return getDataBase().then((db) => {
-        return db.collection('texts').find({_id: new ObjectId(idText)}).next();
-    });
+    return getElement(idText,collectionName);
 }
 
 function getAllTexts() {
-    return getDataBase().then((db) => {
-        return db.collection('texts').find().toArray();
-    });
+    return getAllElements(collectionName);
 }
 
 module.exports = {

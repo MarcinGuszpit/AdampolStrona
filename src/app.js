@@ -3,17 +3,19 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const csrf = require('csurf');
-const data = require('./model/data');
 const {mongoDbConnect} = require('./utils/database');
 //routes
 
-const mainRoutes = require('./routes/main');
-const adminRoutes = require('./routes/admin');
+const mainPageRoutes = require('./routes/main');
+const adminLoginRoutes = require('./routes/admin-login');
 const adminRoutesAdditionalSettings = require('./routes/admin-settings');
 const adminRoutesTexts = require('./routes/admin-texts');
 const adminRoutesHTML = require('./routes/admin-html');
-const {appKey} = require("./settings/settings");
+const adminRoutesPageSections = require('./routes/admin-page-sections');
+const adminRoutesGalleries = require('./routes/admin-galleries');
+const adminRoutesAdditional = require('./routes/admin-additional');
 
+const {appKey} = require("./settings/settings");
 const app = express();
 const csrfProtection = csrf();
 
@@ -37,35 +39,16 @@ app.use((req, res, next) => {
 
 app.use(express.static(path.join(__dirname, 'static')));
 
+//routes
+app.use(mainPageRoutes);
+//admin routes
 app.use(adminRoutesAdditionalSettings);
 app.use(adminRoutesTexts);
 app.use(adminRoutesHTML);
-app.use(adminRoutes);
-app.use(mainRoutes);
-
-// app.get('/template_test', (req, res) => {
-//     console.log(data.user)
-//     const page = {
-//         id: 'ustawienia',
-//         link: 'settings',
-//         menuTitle: 'Ustawienia',
-//         pageTitle: 'Administrator - ustawnienia',
-//         subTitle: 'Dodatkowe ustawienia aplikacji',
-//         description: 'Inne ustawienia aplikacji, które możesz zmieniać'
-//     };
-//
-//     res.render('index.ejs',
-//         {
-//             page,
-//             pageTitle: 'To jest tytuł strony',
-//             sections: data.page_titles,
-//             selectedPage: page.id,
-//             pages: data.pages,
-//             user: data.user,
-//             languages: data.languages,
-//             contentTypes: data.contentTypes
-//         });
-// })
+app.use(adminLoginRoutes);
+app.use(adminRoutesPageSections);
+app.use(adminRoutesGalleries);
+app.use(adminRoutesAdditional);
 
 app.use((req, res, next) => {
     res.status(404).render('error-custom-msg.ejs', {

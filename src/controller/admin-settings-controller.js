@@ -1,7 +1,7 @@
 const {getAdminData, saveAdminData, getBasicAdminData} = require("../model/admin-model");
 const {getAllTexts} = require("../model/texts-model");
 const data = require("../model/data");
-const {findPage, emptyErrors, createEmptyObject, getObjectFromRequestParams, extractErrors} = require("../utils/utils");
+const {findPage, emptyErrors, createEmptyObject, getObjectFromRequestParams, extractErrors, findInArray} = require("../utils/utils");
 const {validationResult} = require("express-validator");
 
 const objFields = ['_id', 'name', 'email', 'password', 'new_password'];
@@ -17,7 +17,7 @@ const pagesAdditionalText = {
     }
 }
 
-const page = findPage('admin');
+const page = findInArray('admin','id',data.pages);
 
 function showAdminSettings(req, res, next) {
     getBasicAdminData().then((results) => {

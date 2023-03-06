@@ -1,31 +1,31 @@
 const {deleteElement, saveElement, addNewElement, getElement, getAllElements} = require("./basic-crud-operations");
 
-const collectionName = 'htmls';
+const collectionName = 'page_sections';
 
-function deleteHTML(elemId) {
+function deletePageSection(elemId) {
     return deleteElement(elemId,collectionName);
 }
 
-function saveHTML(html) {
+function savePageSection(html) {
     return saveElement(html,collectionName);
 }
 
-function addNewHTML(html) {
+function addNewPageSection(html) {
     return addNewElement(html,collectionName);
 }
 
-function getHTML(idElem) {
+function getPageSection(idElem) {
     return getElement(idElem,collectionName);
 }
 
-function getAllHTMLs() {
+function getAllPageSections() {
     return getAllElements(collectionName);
 }
 
 module.exports = {
-    saveHTML,
-    getHTML,
-    getAllHTMLs,
-    addNewHTML,
-    deleteHTML
+    savePageSection,
+    getPageSection,
+    getAllPageSections,
+    addNewPageSection,
+    deletePageSection
 }

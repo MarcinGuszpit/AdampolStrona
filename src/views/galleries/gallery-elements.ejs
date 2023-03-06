@@ -1,0 +1,17 @@
+<% for (const gallery of data) { %>
+    <div class="gallery-element">
+        <h3 class="element-title"><%=gallery.name %></h3>
+        <div class="element-description">
+            <%= gallery.description %>
+        </div>
+        <div class="gallery-images">
+            <% for (const img of gallery.images) {%>
+                <img src="/img_galleries/<%=img%>" alt="gallery image">
+            <% }%>
+        </div>
+        <div class="button-wrapper">
+            <a href="edit/<%= gallery._id %>" class="btn edit">Edytuj</a>
+            <button class="btn remove" data-element="<%= gallery._id %>">Usuń</button>
+        </div>
+    </div>
+<% } %>

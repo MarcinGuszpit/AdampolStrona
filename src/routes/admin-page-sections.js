@@ -1,16 +1,15 @@
 const express = require('express');
+const {
+    renderListAllPageSections,
+    renderAddNewPageSection,
+    renderEditPageSection
+} = require("../controller/page-sections-controller");
 const router = express.Router();
 
-router.get('/page-sections/list', (req, res, next) => {
-    res.send('galleries');
-});
+router.get('/page-sections/list', renderListAllPageSections);
 
-router.get('/page-sections/add-new', (req, res, next) => {
-    res.send('add new galery');
-});
+router.use('/page-sections/add-new', renderAddNewPageSection);
 
-router.get('/page-sections/edit/:id', (req, res, next) => {
-    res.send('edit gallary ');
-});
+router.use('/page-sections/edit/:id', renderEditPageSection);
 
 module.exports = router;

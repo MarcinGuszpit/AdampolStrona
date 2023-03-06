@@ -10,11 +10,13 @@
         <h3 class="element-title">Dodawanie/edycja tekstu</h3>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <input type="hidden" name="_id" value="<%= data._id %>">
+
         <label class="form-label">Opis</label>
         <input class="form-input" type="text" name="description" value="<%= data.description %>">
         <% if (errors && errors.description && errors.description != '') { %>
             <div class="form-error"><%= errors.description %></div>
         <% } %>
+
         <label class="form-label">Tekst</label>
         <textarea class="form-input" cols="10" rows="10" name="text"><%= data.text %></textarea>
         <% if (errors && errors.text && errors.text != '') { %>
