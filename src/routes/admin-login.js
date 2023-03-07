@@ -8,14 +8,16 @@ router.get("/login", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
     req.session.loggedIn = true;
-    console.log(req.body);
-    res.send('Logowanie obsługa');
+    res.redirect('/page-sections/list');
 });
 
 
 router.get("/logout", (req, res, next) => {
     console.log('log out');
-    res.redirect('/login');
+    req.session.destroy(() => {
+
+        res.redirect('/login');
+    });
 });
 
 

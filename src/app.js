@@ -4,8 +4,11 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const csrf = require('csurf');
 const {mongoDbConnect} = require('./utils/database');
-//routes
+const {appKey, databaseURL} = require("./settings/settings");
+const MongoDBSessionStore = require('connect-mongodb-session')(session);
 
+
+//routes
 const mainPageRoutes = require('./routes/main');
 const adminLoginRoutes = require('./routes/admin-login');
 const adminRoutesAdditionalSettings = require('./routes/admin-settings');
@@ -15,21 +18,38 @@ const adminRoutesPageSections = require('./routes/admin-page-sections');
 const adminRoutesGalleries = require('./routes/admin-galleries');
 const adminRoutesAdditional = require('./routes/admin-additional');
 
-const {appKey} = require("./settings/settings");
+
 const app = express();
 const csrfProtection = csrf();
-
+// app.set('trust proxy', 1);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+const store = MongoDBSessionStore({
+    uri: databaseURL,
+    collection: 'sessions'
+});
 
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+
+app.use(express.static(path.join(__dirname, 'static')));
+
 app.use(session({
-    secret: appKey,
+    // cookie: {
+    //     maxAge: 1000 * 60 * 60, // 1 godz
+    //     sameSite: 'none',
+    //     secure: true,
+    // },
+    saveUninitialized: false,
     resave: false,
-    saveUninitialized: false
+    secret: appKey,
+    // resave: false,
+    rolling: true,
+    store: store
 }));
+
 app.use(csrfProtection);
 
 app.use((req, res, next) => {
@@ -37,7 +57,11 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use(express.static(path.join(__dirname, 'static')));
+app.use((req, res, next) => {
+    console.log('log przy każdym żądaniu')
+    console.log(req.session.loggedIn);
+    next();
+})
 
 //routes
 app.use(mainPageRoutes);
