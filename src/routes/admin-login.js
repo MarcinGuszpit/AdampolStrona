@@ -1,4 +1,6 @@
 const express = require('express');
+const {checkAdmin} = require("../model/admin-model");
+const {getObjectFromRequestParams} = require("../utils/utils");
 const router = express.Router();
 
 
@@ -7,8 +9,20 @@ router.get("/login", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
-    req.session.loggedIn = true;
-    res.redirect('/page-sections/list');
+    const userData = getObjectFromRequestParams(req, true);
+    console.log(userData);
+    checkAdmin(userData).then((validationResult) => {
+        req.session.loggedIn = true;
+        req.session.user = userData.user;
+        res.redirect('/page-sections/list');
+        console.log(validationResult);
+
+    }).catch((err) => {
+        console.log(err);
+        console.log('Nieudane logowanie');
+    });
+
+
 });
 
 
