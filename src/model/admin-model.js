@@ -5,7 +5,6 @@ const {ObjectId} = require("mongodb");
 function saveAdminData(adminData) {
     return bcrypt.hash(adminData.password, 12).then((result) => {
         adminData = {...adminData, _id: new ObjectId(adminData._id), password: result};
-        console.log(adminData);
         return getDataBase().then((db) => {
             return db.collection('admin-settings').updateOne({_id: adminData._id}, {$set: adminData});
         });

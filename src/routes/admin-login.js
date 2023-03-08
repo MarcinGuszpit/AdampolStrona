@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get("/login", (req, res, next) => {
-    res.render('login.ejs', {pageTitle: 'Logowanie'});
+    res.render('login.ejs', {pageTitle: 'Logowanie', error: false, errorMsg: null});
 });
 
 router.post("/login", (req, res, next) => {
@@ -14,22 +14,27 @@ router.post("/login", (req, res, next) => {
         if (result) {
             req.session.loggedIn = true;
             req.session.email = userData.email;
-            req.session.save(()=>{
+            req.session.save(() => {
                 res.redirect('/page-sections/list');
             });
+
+        } else {
+            res.render('login.ejs', {pageTitle: 'Logowanie', error: true, errorMsg: 'Niepoprawne dane logowania!'});
         }
 
-    }).catch((err) => {
-        console.log(err);
-        console.log('Nieudane logowanie');
+    }).catch(() => {
+        res.render('error-custom-msg.ejs', {
+            error: null,
+            title: 'Wystąpił błąd!',
+            info: 'Coś poszło nie tak podczas logowania!',
+            link: '/login',
+            linkMessage: 'Powrót do formularza logowania'
+        });
     });
-
-
 });
 
 
 router.get("/logout", (req, res, next) => {
-    console.log('log out');
     req.session.destroy(() => {
         res.redirect('/login');
     });

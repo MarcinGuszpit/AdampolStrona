@@ -26,6 +26,11 @@
             <input class="form-input" type="text" name="email">
             <label class="form-label">Hasło</label>
             <input class="form-input" type="password" name="password">
+            <% if (error) { %>
+                <div class="login-error-wrapper">
+                    <span class="login-error"><%=errorMsg%></span>
+                </div>
+            <% } %>
             <div class="button-row">
                 <input type="submit" class="btn edit" value="Zaloguj">
             </div>

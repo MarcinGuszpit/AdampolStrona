@@ -84,6 +84,18 @@
     font-size: 12px;
 }
 
+.login-error-wrapper {
+    padding: 10px 0;
+    width: 100%;
+}
+
+.login-error {
+    color: white;
+    font-style: italic;
+
+}
+
+
 .form .label-warning {
     margin: 10px 0;
     display: block;
