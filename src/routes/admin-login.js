@@ -10,12 +10,14 @@ router.get("/login", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
     const userData = getObjectFromRequestParams(req, true);
-    console.log(userData);
-    checkAdmin(userData).then((validationResult) => {
-        req.session.loggedIn = true;
-        req.session.user = userData.user;
-        res.redirect('/page-sections/list');
-        console.log(validationResult);
+    checkAdmin(userData).then((result) => {
+        if (result) {
+            req.session.loggedIn = true;
+            req.session.email = userData.email;
+            req.session.save(()=>{
+                res.redirect('/page-sections/list');
+            });
+        }
 
     }).catch((err) => {
         console.log(err);
@@ -29,7 +31,6 @@ router.post("/login", (req, res, next) => {
 router.get("/logout", (req, res, next) => {
     console.log('log out');
     req.session.destroy(() => {
-
         res.redirect('/login');
     });
 });

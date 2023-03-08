@@ -14,7 +14,7 @@ function renderAdditionalSettings(req, res, next) {
         subTitle: pagesAdditionalText.subTitle,
         description: pagesAdditionalText.description,
         pages: data.pages,
-        user: data.user,
+        user: req.session.email,
         contentTypes: data.contentTypes
     });
 }

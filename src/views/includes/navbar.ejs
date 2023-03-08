@@ -1,4 +1,4 @@
-<% if (user && user.name && user.id)  { %>
+<% if (user)  { %>
 
     <nav class="navbar">
         <div class="logo-wrapper">
@@ -7,8 +7,8 @@
         </div>
         <div class="menu-details">
             <div class="user-login-wrapper">
-                <% if (user && user.name && user.id)  { %>
-                    <span class="user-name">zalogowano jako: <%= user.name %></span>
+                <% if (user)  { %>
+                    <span class="user-name">zalogowano jako: <%= user %></span>
                     <a href="/logout" class="login-link">wyloguj</a>
                 <% } else { %>
                     <a href="/login" class="login-link">zaloguj</a>

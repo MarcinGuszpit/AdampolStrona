@@ -1,7 +1,14 @@
 const {getAdminData, saveAdminData, getBasicAdminData} = require("../model/admin-model");
 const {getAllTexts} = require("../model/texts-model");
 const data = require("../model/data");
-const {findPage, emptyErrors, createEmptyObject, getObjectFromRequestParams, extractErrors, findInArray} = require("../utils/utils");
+const {
+    findPage,
+    emptyErrors,
+    createEmptyObject,
+    getObjectFromRequestParams,
+    extractErrors,
+    findInArray
+} = require("../utils/utils");
 const {validationResult} = require("express-validator");
 
 const objFields = ['_id', 'name', 'email', 'password', 'new_password'];
@@ -17,7 +24,7 @@ const pagesAdditionalText = {
     }
 }
 
-const page = findInArray('admin','id',data.pages);
+const page = findInArray('admin', 'id', data.pages);
 
 function showAdminSettings(req, res, next) {
     getBasicAdminData().then((results) => {
@@ -26,14 +33,16 @@ function showAdminSettings(req, res, next) {
             subTitle: pagesAdditionalText.LIST.subTitle,
             description: pagesAdditionalText.LIST.description,
             pages: data.pages,
-            user: data.user,
+            user: req.session.email,
             data: results
         });
     }).catch(() => {
         res.render('error-custom-msg.ejs', {
             error: null,
             title: 'Nie udało się pobrać listy elementów!',
-            info: 'Wystąpił błąd dostępu do bazy danych!'
+            info: 'Wystąpił błąd dostępu do bazy danych!',
+            link: '/admin/list',
+            linkMessage: 'Powrót do podstrony administrator'
         });
     });
 }
@@ -54,7 +63,7 @@ function render(req, res, next, titles, saveMethod) {
                 subTitle: titles.subTitle,
                 description: titles.description,
                 pages: data.pages,
-                user: data.user,
+                user: req.session.email
             });
         }
         if (req.method === 'POST') {
@@ -67,7 +76,9 @@ function render(req, res, next, titles, saveMethod) {
                     res.render('error-custom-msg.ejs', {
                         error: null,
                         title: 'Nie udało się zapisać elementu!',
-                        info: 'Wystąpił błąd dostępu do bazy danych!'
+                        info: 'Wystąpił błąd dostępu do bazy danych!',
+                        link: '/admin/list',
+                        linkMessage: 'Powrót do podstrony administrator'
                     });
                 });
             } else {
@@ -79,7 +90,7 @@ function render(req, res, next, titles, saveMethod) {
                     subTitle: titles.subTitle,
                     description: titles.description,
                     pages: data.pages,
-                    user: data.user,
+                    user: req.session.email,
                 });
             }
         }

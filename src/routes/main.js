@@ -32,7 +32,9 @@ router.post('/', (req, res, next) => {
     res.render('error-custom-msg.ejs', {
         error: null,
         title: 'Dziękujemy za wiadomość',
-        info: 'Niestety w obecnej chwili wysyłanie wiadomości nie działa. Jeżeli chcesz się skontaktować, skorzystaj z maila podanego na stronie głównej'
+        info: 'Niestety w obecnej chwili wysyłanie wiadomości nie działa. Jeżeli chcesz się skontaktować, skorzystaj z maila podanego na stronie głównej',
+        link: null,
+        linkMessage: null
     });
 });
 

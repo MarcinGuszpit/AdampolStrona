@@ -5,12 +5,12 @@ const {ObjectId} = require("mongodb");
 function saveAdminData(adminData) {
     return bcrypt.hash(adminData.password, 12).then((result) => {
         adminData = {...adminData, _id: new ObjectId(adminData._id), password: result};
+        console.log(adminData);
         return getDataBase().then((db) => {
             return db.collection('admin-settings').updateOne({_id: adminData._id}, {$set: adminData});
         });
     });
 }
-
 function getAdminData() {
     return getDataBase().then((db) => {
         return db.collection('admin-settings').findOne();
@@ -30,7 +30,7 @@ function checkAdmin(admin) {
     return getDataBase().then((db) => {
         return db.collection('admin-settings').findOne().then((adminFromDb) => {
             if (admin.email === adminFromDb.email) {
-                return bcrypt.compare(adminFromDb.password, admin.password);
+                return bcrypt.compare(admin.password,adminFromDb.password);
             }
             return new Promise((resolve, reject) => {
                 reject(new Error('Nieprawidłowe dane logowania'));

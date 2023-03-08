@@ -1,11 +1,12 @@
 const express = require('express');
 const {showAdminSettings, editAdminSettings} = require("../controller/admin-settings-controller");
 const {check} = require("express-validator");
+const {isLoggedIn} = require("../controller/admin-isLoggedIn-middleware");
 
 const router = express.Router();
 
-router.get('/admin/list', showAdminSettings);
-router.use('/admin/edit', [
+router.get('/admin/list', isLoggedIn, showAdminSettings);
+router.use('/admin/edit', isLoggedIn, [
         check('name').notEmpty().withMessage('Nazwa użytkownika nie może być pusta!'),
         check('email').notEmpty().isEmail().withMessage('Wpisana wartość musi być prawidłowym adresem email!'),
         check('password').notEmpty().isLength({min: 5})

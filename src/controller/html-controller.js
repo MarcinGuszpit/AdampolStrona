@@ -37,14 +37,16 @@ function renderAllHTML(req, res, next) {
             subTitle: pagesAdditionalText.LIST.subTitle,
             description: pagesAdditionalText.LIST.description,
             pages: data.pages,
-            user: data.user,
+            user: req.session.email,
             data: results
         });
     }).catch(() => {
         res.render('error-custom-msg.ejs', {
             error: null,
             title: 'Nie udało się pobrać listy elementów!',
-            info: 'Wystąpił błąd dostępu do bazy danych!'
+            info: 'Wystąpił błąd dostępu do bazy danych!',
+            link: '/html/list',
+            linkMessage: 'Powrót do podstrony - HTML'
         });
     });
 }
@@ -76,7 +78,9 @@ function render(req, res, next, appState, titles, saveMethod) {
                         res.render('error-custom-msg.ejs', {
                             error: null,
                             title: 'Nie udało się zapisać elementu!',
-                            info: 'Wystąpił błąd dostępu do bazy danych!'
+                            info: 'Wystąpił błąd dostępu do bazy danych!',
+                            link: '/html/list',
+                            linkMessage: 'Powrót do podstrony - HTML'
                         });
                     });
 
@@ -89,7 +93,7 @@ function render(req, res, next, appState, titles, saveMethod) {
                         subTitle: titles.subTitle,
                         description: titles.description,
                         pages: data.pages,
-                        user: data.user,
+                        user: req.session.email,
                     });
                 }
             }
@@ -101,7 +105,7 @@ function render(req, res, next, appState, titles, saveMethod) {
                     subTitle: titles.subTitle,
                     description: titles.description,
                     pages: data.pages,
-                    user: data.user,
+                    user: req.session.email,
                 });
             }
 
@@ -109,7 +113,9 @@ function render(req, res, next, appState, titles, saveMethod) {
             res.render('error-custom-msg.ejs', {
                 error: null,
                 title: 'Wystąpił błąd!',
-                info: 'Nie udało się utworzyć elementu do edycji!'
+                info: 'Nie udało się utworzyć elementu do edycji!',
+                link: '/html/list',
+                linkMessage: 'Powrót do podstrony - HTML'
             });
         }
     });

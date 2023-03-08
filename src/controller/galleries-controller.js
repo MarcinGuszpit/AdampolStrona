@@ -28,7 +28,7 @@ function renderAllGalleries(req,res,next) {
             subTitle: pagesAdditionalText.LIST.subTitle,
             description: pagesAdditionalText.LIST.description,
             pages: data.pages,
-            user: data.user,
+            user: req.session.email,
             data: results
         });
     });

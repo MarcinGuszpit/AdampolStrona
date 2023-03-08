@@ -31,14 +31,16 @@ function renderListAllPageSections(req, res, next) {
             subTitle: pagesAdditionalText.LIST.subTitle,
             description: pagesAdditionalText.LIST.description,
             pages: data.pages,
-            user: data.user,
+            user: req.session.email,
             data: results
         });
     }).catch(() => {
         res.render('error-custom-msg.ejs', {
             error: null,
             title: 'Nie udało się pobrać listy elementów!',
-            info: 'Wystąpił błąd dostępu do bazy danych!'
+            info: 'Wystąpił błąd dostępu do bazy danych!',
+            link: '/page-sections/list',
+            linkMessage: 'Powrót do podstrony - sekcje strony głównej'
         });
     });
 }
@@ -73,7 +75,7 @@ function render(req, res, next, appState, titles, saveMethod) {
                 galleries,
                 description: titles.description,
                 pages: data.pages,
-                user: data.user
+                user: req.session.email,
             })
 
         }).catch(() => {
@@ -81,7 +83,9 @@ function render(req, res, next, appState, titles, saveMethod) {
             res.render('error-custom-msg.ejs', {
                 error: null,
                 title: 'Nie udało się pobrać niektórych elementów!',
-                info: 'Wystąpił błąd dostępu do bazy danych!'
+                info: 'Wystąpił błąd dostępu do bazy danych!',
+                link: '/page-sections/list',
+                linkMessage: 'Powrót do podstrony - sekcje strony głównej'
             });
         })
     }

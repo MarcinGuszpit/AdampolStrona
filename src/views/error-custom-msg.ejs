@@ -14,31 +14,37 @@
     <meta name="description"
           content="Strona producenta odzieży damskiej, firmy PPHU &quot;Adampol&quot; Regina Lewandowska">
     <meta name="keywords" content="odzież damska, bluzki, żakiety, komplety, spodnie">
-    <title>PPHU Adampol Regina Lewandowska</title>
+    <title>Błąd!!!</title>
     <script defer src="/app.js"></script>
     <link href="/style.css" rel="stylesheet">
 </head>
 <body class="all">
 <article class="section section-msg">
     <img src="/assets/adampol_small_3d96b5c58ab4e98a0f4c.png" alt="logo firmy" class="img-msg">
+
+    <% if (error && error.title && error.msg) { %>
+        <div class="error-box">
+            <span class="error-code"><%= error.title %></span>
+            <span class="error-msg"><%= error.msg %></span>
+        </div>
+    <% } %>
+
     <% if (title) { %>
-    <h3 class="section-title"><%= title %></h3>
+        <h3 class="section-title"><%= title %></h3>
     <% } %>
 
     <% if (info) { %>
-    <div class="msg">
-        <%= info %>
-    </div>
+        <div class="msg">
+            <%= info %>
+        </div>
     <% } %>
 
-    <% if (error && error.title && error.msg) { %>
-    <div class="error-box">
-        <span class="error-code"><%= error.title %></span>
-        <span class="error-msg"><%= error.msg %></span>
-    </div>
+    <% if (link && link !== '') { %>
+    <a href="<%=link %>" class="msg-link"><%=linkMessage %></a>
+    <% } else { %>
+        <a href="/" class="msg-link">Powrót do strony głównej</a>
     <% } %>
 
-    <a href="/" class="msg-link">Powrót do strony głównej</a>
 </article>
 
 

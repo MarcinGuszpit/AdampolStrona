@@ -45,7 +45,6 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     secret: appKey,
-    // resave: false,
     rolling: true,
     store: store
 }));
@@ -54,12 +53,6 @@ app.use(csrfProtection);
 
 app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken();
-    next();
-})
-
-app.use((req, res, next) => {
-    console.log('log przy każdym żądaniu')
-    console.log(req.session.loggedIn);
     next();
 })
 
@@ -81,7 +74,9 @@ app.use((req, res, next) => {
             msg: 'Wybrana strona nie istnieje!',
         },
         title: null,
-        info: null
+        info: null,
+        link: null,
+        linkMessage: null
     });
 })
 

@@ -85,9 +85,5 @@ const contentTypes = [
 module.exports = {
     pages,
     contentTypes,
-    languages,
-    user: {
-        name: 'admin',
-        id: '234567899'
-    }
+    languages
 };
