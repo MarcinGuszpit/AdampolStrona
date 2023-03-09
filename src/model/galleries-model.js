@@ -3,19 +3,19 @@ const {deleteElement, saveElement, addNewElement, getElement, getAllElements} = 
 const collectionName = 'img_collections';
 
 function deleteGallery(elemId) {
-    return deleteElement(elemId,collectionName);
+    return deleteElement(elemId, collectionName);
 }
 
 function saveGallery(elem) {
-    return saveElement(elem,collectionName);
+    return saveElement(elem, collectionName);
 }
 
 function addNewGallery(elem) {
-    return addNewElement(elem,collectionName);
+    return addNewElement(elem, collectionName);
 }
 
 function getGallery(idElem) {
-    return getElement(idElem,collectionName);
+    return getElement(idElem, collectionName);
 }
 
 function getAllGalleries() {
@@ -23,5 +23,6 @@ function getAllGalleries() {
 }
 
 module.exports = {
-    getAllGalleries
+    getAllGalleries,
+    getGallery
 }

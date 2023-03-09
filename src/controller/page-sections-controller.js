@@ -1,6 +1,6 @@
 const {findPage, emptyErrors, createEmptyObject, getObjectFromRequestParams, findInArray, extractErrors} = require("../utils/utils");
 const data = require("../model/data");
-const {getAllPageSections, getPageSection} = require("../model/pageSections-model");
+const {getAllPageSections, getPageSection, savePageSection} = require("../model/pageSections-model");
 const {app_states} = require("../utils/enums");
 const {getAllTexts} = require("../model/texts-model");
 const {getAllHTMLs} = require("../model/htmls-model");
@@ -57,16 +57,11 @@ function renderListAllPageSections(req, res, next) {
 }
 
 function renderAddNewPageSection(req, res, next) {
-    render(req, res, next, app_states.NEW, pagesAdditionalText.NEW, save);
+    render(req, res, next, app_states.NEW, pagesAdditionalText.NEW, savePageSection);
 }
 
 function renderEditPageSection(req, res, next) {
     res.send('edit existing page section');
-}
-
-function save() {
-    console.log('save');
-
 }
 
 function render(req, res, next, appState, titles, saveMethod) {
@@ -136,12 +131,6 @@ function render(req, res, next, appState, titles, saveMethod) {
                 user: req.session.email,
             });
         }
-
-
-
-
-        console.log(obj);
-
     }
 }
 
