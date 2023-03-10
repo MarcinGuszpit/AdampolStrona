@@ -20,7 +20,6 @@ const page = findInArray('galleries', 'id', data.pages);
 const objFields = ['_id', 'name', 'description', 'images'];
 
 
-
 function renderAllGalleries(req,res,next) {
     getAllGalleries().then((results)=>{
         res.render('galleries/galleries-list.ejs', {

@@ -2,6 +2,8 @@ const {deleteElement, saveElement, addNewElement, getElement, getAllElements} = 
 const {getText} = require("./texts-model");
 const {getAllGalleries, getGallery} = require("./galleries-model");
 const {getHTML} = require("./htmls-model");
+const {findInArray} = require("../utils/utils");
+const data = require("./data");
 
 function getObject(elem) {
     let {content_type, elem_id} = {...elem};
@@ -35,15 +37,18 @@ function deletePageSection(elemId) {
 
 function savePageSection(elem) {
     return getObject(elem).then((obj) => {
-        console.log(obj);
-        return true;
-    }).catch((error => {
-        console.log(error);
-    }))
+        elem.object = obj;
+        elem.content_object = findInArray(elem.content_type, 'id', data.contentTypes);
+        return saveElement(elem, collectionName);
+    });
 }
 
 function addNewPageSection(elem) {
-    return addNewElement(elem, collectionName);
+    return getObject(elem).then((obj) => {
+        elem.object = obj;
+        elem.content_object = findInArray(elem.content_type, 'id', data.contentTypes);
+        return addNewElement(elem, collectionName);
+    });
 }
 
 function getPageSection(idElem) {

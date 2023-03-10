@@ -1,0 +1,35 @@
+<div class="section-list">
+
+    <% for (const pageSection of data) { %>
+
+    <div class="section-elem">
+        <div class="element-property">
+            <label class="elem-label">Nazwa sekcji:</label>
+            <span class="elem-property"><%= pageSection.title %></span>
+        </div>
+
+        <div class="element-property">
+            <label class="elem-label">Nazwa sekcji w menu strony:</label>
+            <span class="elem-property"><%= pageSection.nav_title %></span>
+        </div>
+
+        <div class="element-property">
+            <label class="elem-label">Typ zawartości:</label>
+            <span class="elem-property"><%= pageSection.content_object.description %></span>
+        </div>
+
+        <div class="element-property">
+            <label class="elem-label">Opis zawartosci strony:</label>
+            <span class="elem-property"><%= pageSection.object.description %></span>
+        </div>
+
+        <div class="button-wrapper">
+            <a href="edit/<%= pageSection._id %>" class="btn edit">Edytuj</a>
+            <button class="btn remove" data-element="<%= pageSection._id %>">Usuń</button>
+        </div>
+
+    </div>
+
+    <% } %>
+
+</div>

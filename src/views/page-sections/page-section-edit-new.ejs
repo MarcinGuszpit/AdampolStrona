@@ -4,8 +4,9 @@
 <article class="section">
     <h2 class="section-title"><%= subTitle %></h2>
     <p class="section-subtitle"><%= description %></p>
-
-    <form class="form" action="/page-sections/add-new" method="post">
+    <form class="form"
+          action="<%= (data._id && data._id !== '') ? '/page-sections/edit/' + data._id : '/page-sections/add-new' %>"
+          method="post">
 
         <h3 class="element-title">Dodawanie/edycja sekcji strony głównej</h3>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
@@ -38,7 +39,7 @@
                     <label class="select-label">Wybierz element HTML, który ma być umieszczony na podstronie: </label>
                     <select class="form-select" name="html_id">
                         <% for (const html of htmls) { %>
-                            <option value="<%= html._id %>"><%= html.description %></option>
+                            <option value="<%= html._id %>" <%= ('' + data.elem_id) === ('' +html._id) ? ' selected' : '' %> ><%= html.description %></option>
                         <% } %>
                     </select>
                 <% } %>
@@ -48,7 +49,7 @@
                     <label class="select-label">Wybierz tekst, który ma być umieszczony na podstronie: </label>
                     <select class="form-select" name="txt_id">
                         <% for (const text of texts) { %>
-                            <option value="<%= text._id %>"><%= text.description %></option>
+                            <option value="<%= text._id %>" <%= ('' + data.elem_id) === ('' + text._id) ? ' selected' : '' %>><%= text.description %></option>
                         <% } %>
                     </select>
                 <% } %>
@@ -58,7 +59,7 @@
                     <label class="select-label">Wybierz galerię: </label>
                     <select class="form-select" name="gallery_id">
                         <% for (const gallery of galleries) { %>
-                            <option value="<%= gallery._id %>"><%= gallery.name %></option>
+                            <option value="<%= gallery._id %>" <%= ('' + data.elem_id) === ('' + gallery._id) ? ' selected' : '' %>><%= gallery.name %></option>
                         <% } %>
                     </select>
                 <% } %>
