@@ -1,8 +1,6 @@
-const {getAdminData, saveAdminData, getBasicAdminData} = require("../model/admin-model");
-const {getAllTexts} = require("../model/texts-model");
+const {saveAdminData, getBasicAdminData} = require("../model/admin-model");
 const data = require("../model/data");
 const {
-    findPage,
     emptyErrors,
     createEmptyObject,
     getObjectFromRequestParams,

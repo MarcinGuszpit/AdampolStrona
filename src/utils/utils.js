@@ -1,5 +1,14 @@
 const {app_states} = require("./enums");
 
+function getFileExtension(mimeType) {
+    switch (mimeType) {
+        case 'image/jpeg': {return '.jpeg';}
+        case 'image/jpg': {return '.jpg';}
+        case 'image/png': {return '.png';}
+        default: {return null;}
+    }
+}
+
 function extractErrors(errorsObj, headers) {
     let results = {};
     for (const key of Object.keys(headers)) {
@@ -73,5 +82,6 @@ module.exports = {
     createEmptyObject,
     getObject,
     emptyErrors,
-    findInArray
+    findInArray,
+    getFileExtension
 }

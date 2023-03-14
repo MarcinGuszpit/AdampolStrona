@@ -5,7 +5,7 @@
     <h2 class="section-title"><%= subTitle %></h2>
     <p class="section-subtitle"><%= description %></p>
 
-    <form class="form" action="<%= (data._id && data._id !== '')?'/html/edit/' + data._id:'/html/add-new' %>" method="post">
+    <form class="form" action="<%= (data._id && data._id !== '')?'/html/edit/' + data._id: '/html/add-new' %>" method="post">
         <h3 class="element-title">Dodawanie/edycja fragmentu HTML</h3>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <input type="hidden" name="_id" value="<%= data._id %>">

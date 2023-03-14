@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/galleries/list', isLoggedIn, renderAllGalleries);
 
-router.get('/galleries/add-new', isLoggedIn, renderAddNewGallery);
+router.use('/galleries/add-new', isLoggedIn, renderAddNewGallery);
 
 router.get('/galleries/edit/:id', isLoggedIn, renderEditGallery);
 

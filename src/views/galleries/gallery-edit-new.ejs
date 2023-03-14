@@ -1,0 +1,28 @@
+<%- include('./../includes/top.ejs') %>
+<%- include('./../includes/navbar.ejs') %>
+
+<article class="section">
+    <h2 class="section-title"><%= subTitle %></h2>
+    <p class="section-subtitle"><%= description %></p>
+
+
+    <form method="post" action="/galleries/add-new" enctype="multipart/form-data">
+        <h3 class="element-title">Dodawanie nowego obrazu do galerii</h3>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="hidden" name="_id" value="<%= data._id %>">
+        <label class="form-label">Wybierz obraz</label>
+        <input type="file" name="image" id="image">
+        <div class="button-row">
+            <input class="btn remove" type="submit" value="Zapisz">
+        </div>
+
+    </form>
+
+    <!--    <form  method="post" action="/galleries/add-new"  enctype="multipart/form-data">-->
+
+    <!--    </form>-->
+
+
+</article>
+
+<%- include('./../includes/bottom.ejs') %>
